@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useCallback } from 'react'
-import Particles from '@tsparticles/react'
+import Particles from 'react-tsparticles'
 import { loadSlim } from '@tsparticles/slim'
 import { useLanguage } from '@/providers/language-provider'
 import { ArrowRight, ChevronDown } from 'lucide-react'
@@ -68,7 +68,8 @@ const Hero = () => {
             number: {
               density: {
                 enable: true,
-                area: 800,
+                height: 800,
+                width: 800,
               },
               value: 80,
             },
