@@ -5,17 +5,17 @@ import ScoutingSection from '@/components/sections/ScoutingSection'
 import TacticsSection from '@/components/sections/TacticsSection'
 import SaveIdeasSection from '@/components/sections/SaveIdeasSection'
 import SupportSection from '@/components/sections/SupportSection'
-import NewsletterSection from "@/components/sections/NewsletterSection"
+import NewsletterSection from '@/components/sections/NewsletterSection'
 
 export default function Home() {
   return (
     <div>
       <Hero />
       <div id="main-content" className="container py-12">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="lg:w-3/4 space-y-12">
+        <div className="flex flex-col gap-8 lg:flex-row">
+          <div className="space-y-12 lg:w-3/4">
             <NewsSection />
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid gap-8 md:grid-cols-2">
               <ScoutingSection />
               <TacticsSection />
             </div>
@@ -28,7 +28,7 @@ export default function Home() {
         </div>
 
         <div className="mt-16">
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col gap-8 lg:flex-row">
             <div className="lg:w-3/4">
               <SaveIdeasSection />
             </div>

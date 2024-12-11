@@ -1,35 +1,35 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
-import { useCallback } from "react"
-import Particles from "@tsparticles/react"
-import { loadSlim } from "@tsparticles/slim"
-import { useLanguage } from "@/providers/language-provider"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { motion } from 'framer-motion'
+import { useCallback } from 'react'
+import Particles from '@tsparticles/react'
+import { loadSlim } from '@tsparticles/slim'
+import { useLanguage } from '@/providers/language-provider'
+import { ArrowRight, ChevronDown } from 'lucide-react'
 
 const Hero = () => {
   const { language } = useLanguage()
-  
+
   const particlesInit = useCallback(async (engine: any) => {
     await loadSlim(engine)
   }, [])
 
   const scrollToContent = () => {
-    const contentSection = document.getElementById("main-content")
+    const contentSection = document.getElementById('main-content')
     if (contentSection) {
-      contentSection.scrollIntoView({ behavior: "smooth" })
+      contentSection.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
   return (
-    <div className="relative min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center overflow-hidden bg-secondary">
+    <div className="relative flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center overflow-hidden bg-secondary">
       <Particles
         className="absolute inset-0"
         init={particlesInit}
         options={{
           background: {
             color: {
-              value: "transparent",
+              value: 'transparent',
             },
           },
           fpsLimit: 120,
@@ -37,7 +37,7 @@ const Hero = () => {
             events: {
               onHover: {
                 enable: true,
-                mode: "grab",
+                mode: 'grab',
               },
             },
             modes: {
@@ -51,10 +51,10 @@ const Hero = () => {
           },
           particles: {
             color: {
-              value: "#0053FF",
+              value: '#0053FF',
             },
             links: {
-              color: "#0053FF",
+              color: '#0053FF',
               distance: 150,
               enable: true,
               opacity: 0.2,
@@ -96,14 +96,16 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-4"
           >
-            <span className="text-sm md:text-base text-primary font-semibold uppercase tracking-wider">
-              {language === "en" ? "Welcome to the Community" : "مرحباً بك في المجتمع"}
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary md:text-base">
+              {language === 'en'
+                ? 'Welcome to the Community'
+                : 'مرحباً بك في المجتمع'}
             </span>
-            <h1 className="text-4xl md:text-7xl font-bold tracking-tight">
-              {language === "en" ? (
+            <h1 className="text-4xl font-bold tracking-tight md:text-7xl">
+              {language === 'en' ? (
                 <>
                   Your Ultimate
-                  <span className="text-primary block mt-2 font-extrabold">
+                  <span className="mt-2 block font-extrabold text-primary">
                     Football Manager
                   </span>
                   Community
@@ -111,7 +113,7 @@ const Hero = () => {
               ) : (
                 <>
                   مجتمعك الأول
-                  <span className="text-primary block mt-2 font-extrabold">
+                  <span className="mt-2 block font-extrabold text-primary">
                     لمدير كرة القدم
                   </span>
                   العربي
@@ -121,36 +123,42 @@ const Hero = () => {
           </motion.div>
 
           <motion.p
-            className="max-w-2xl mx-auto text-xl md:text-2xl text-muted-foreground font-medium"
+            className="mx-auto max-w-2xl text-xl font-medium text-muted-foreground md:text-2xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            {language === "en"
-              ? "Join thousands of managers sharing tactics, discovering wonderkids, and mastering the game together."
-              : "انضم إلى آلاف المدربين يتشاركون التكتيكات، يكتشفون المواهب الشابة، ويتقنون اللعبة معًا."}
+            {language === 'en'
+              ? 'Join thousands of managers sharing tactics, discovering wonderkids, and mastering the game together.'
+              : 'انضم إلى آلاف المدربين يتشاركون التكتيكات، يكتشفون المواهب الشابة، ويتقنون اللعبة معًا.'}
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12"
+            className="mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row"
           >
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: "hsl(var(--primary))" }}
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: 'hsl(var(--primary))',
+              }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-medium flex items-center gap-2 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 transition-shadow"
+              className="flex items-center gap-2 rounded-lg bg-primary px-8 py-4 font-medium text-primary-foreground shadow-lg shadow-primary/25 transition-shadow hover:shadow-xl hover:shadow-primary/35"
             >
-              {language === "en" ? "Get Started" : "ابدأ الآن"}
+              {language === 'en' ? 'Get Started' : 'ابدأ الآن'}
               <ArrowRight className="h-4 w-4" />
             </motion.button>
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: "hsl(var(--accent))" }}
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: 'hsl(var(--accent))',
+              }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-background border-2 border-border rounded-lg font-medium hover:bg-accent transition-colors"
+              className="rounded-lg border-2 border-border bg-background px-8 py-4 font-medium transition-colors hover:bg-accent"
             >
-              {language === "en" ? "Learn More" : "اعرف المزيد"}
+              {language === 'en' ? 'Learn More' : 'اعرف المزيد'}
             </motion.button>
           </motion.div>
 
@@ -158,38 +166,56 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="grid grid-cols-2 md:grid-cols-3 gap-8 mt-16"
+            className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-3"
           >
             {[
               {
-                value: "500+",
-                label: language === "en" ? "FM24 Wonderkids" : "مواهب شابة",
-                description: language === "en" ? "Potential superstars under 20" : "نجوم المستقبل تحت 20 عامًا",
+                value: '500+',
+                label: language === 'en' ? 'FM24 Wonderkids' : 'مواهب شابة',
+                description:
+                  language === 'en'
+                    ? 'Potential superstars under 20'
+                    : 'نجوم المستقبل تحت 20 عامًا',
               },
               {
-                value: "300+",
-                label: language === "en" ? "Free Transfers" : "انتقالات مجانية",
-                description: language === "en" ? "Available on free transfer" : "متاح للانتقال المجاني",
+                value: '300+',
+                label: language === 'en' ? 'Free Transfers' : 'انتقالات مجانية',
+                description:
+                  language === 'en'
+                    ? 'Available on free transfer'
+                    : 'متاح للانتقال المجاني',
               },
               {
-                value: "200+",
-                label: language === "en" ? "Best Bargains" : "أفضل الصفقات",
-                description: language === "en" ? "Value for money players" : "لاعبون بقيمة مناسبة",
+                value: '200+',
+                label: language === 'en' ? 'Best Bargains' : 'أفضل الصفقات',
+                description:
+                  language === 'en'
+                    ? 'Value for money players'
+                    : 'لاعبون بقيمة مناسبة',
               },
               {
-                value: "400+",
-                label: language === "en" ? "Contract Expiring" : "عقود منتهية",
-                description: language === "en" ? "Players with expiring contracts" : "لاعبون بعقود منتهية",
+                value: '400+',
+                label: language === 'en' ? 'Contract Expiring' : 'عقود منتهية',
+                description:
+                  language === 'en'
+                    ? 'Players with expiring contracts'
+                    : 'لاعبون بعقود منتهية',
               },
               {
-                value: "50+",
-                label: language === "en" ? "Richest Clubs" : "أغنى الأندية",
-                description: language === "en" ? "Clubs with biggest budgets" : "الأندية ذات الميزانيات الأكبر",
+                value: '50+',
+                label: language === 'en' ? 'Richest Clubs' : 'أغنى الأندية',
+                description:
+                  language === 'en'
+                    ? 'Clubs with biggest budgets'
+                    : 'الأندية ذات الميزانيات الأكبر',
               },
               {
-                value: "24/7",
-                label: language === "en" ? "FM Updates" : "تحديثات FM",
-                description: language === "en" ? "Latest database updates" : "أحدث تحديثات قاعدة البيانات",
+                value: '24/7',
+                label: language === 'en' ? 'FM Updates' : 'تحديثات FM',
+                description:
+                  language === 'en'
+                    ? 'Latest database updates'
+                    : 'أحدث تحديثات قاعدة البيانات',
               },
             ].map((stat, index) => (
               <motion.div
@@ -197,13 +223,17 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 + index * 0.1 }}
-                className="group p-6 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-colors"
+                className="group rounded-lg border border-border/50 bg-background/50 p-6 backdrop-blur-sm transition-colors hover:border-primary/50"
               >
-                <div className="text-3xl font-bold text-primary group-hover:scale-105 transition-transform">
+                <div className="text-3xl font-bold text-primary transition-transform group-hover:scale-105">
                   {stat.value}
                 </div>
-                <div className="font-medium text-foreground mt-2">{stat.label}</div>
-                <div className="text-sm text-muted-foreground mt-1">{stat.description}</div>
+                <div className="mt-2 font-medium text-foreground">
+                  {stat.label}
+                </div>
+                <div className="mt-1 text-sm text-muted-foreground">
+                  {stat.description}
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -224,14 +254,14 @@ const Hero = () => {
           transition={{
             duration: 1.5,
             repeat: Infinity,
-            repeatType: "reverse",
+            repeatType: 'reverse',
           }}
-          className="flex flex-col items-center gap-2 hover:text-primary transition-colors"
+          className="flex flex-col items-center gap-2 transition-colors hover:text-primary"
         >
-          <span className="text-sm text-muted-foreground hover:text-primary transition-colors">
-            {language === "en" ? "Scroll to explore" : "اسحب للاستكشاف"}
+          <span className="text-sm text-muted-foreground transition-colors hover:text-primary">
+            {language === 'en' ? 'Scroll to explore' : 'اسحب للاستكشاف'}
           </span>
-          <ChevronDown className="h-4 w-4 text-muted-foreground animate-bounce hover:text-primary" />
+          <ChevronDown className="h-4 w-4 animate-bounce text-muted-foreground hover:text-primary" />
         </motion.div>
       </motion.div>
     </div>

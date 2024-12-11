@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { createContext, useContext, useState } from 'react'
 
@@ -9,16 +9,16 @@ type LanguageContextType = {
   setLanguage: (lang: Language) => void
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined
+)
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>('en')
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
-      <div dir={language === 'ar' ? 'rtl' : 'ltr'}>
-        {children}
-      </div>
+      <div dir={language === 'ar' ? 'rtl' : 'ltr'}>{children}</div>
     </LanguageContext.Provider>
   )
 }

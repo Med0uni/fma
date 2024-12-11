@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import NextImage, { ImageProps as NextImageProps } from 'next/image'
 import { useState } from 'react'
@@ -7,7 +7,11 @@ interface ImageProps extends NextImageProps {
   fallback?: string
 }
 
-export default function Image({ alt, fallback = '/image-placeholder.png', ...props }: ImageProps) {
+export default function Image({
+  alt,
+  fallback = '/image-placeholder.png',
+  ...props
+}: ImageProps) {
   const [error, setError] = useState(false)
 
   return (

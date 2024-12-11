@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import { motion } from "framer-motion"
-import { useLanguage } from "@/providers/language-provider"
-import Image from "next/image"
-import { cn } from "@/lib/utils"
+import { motion } from 'framer-motion'
+import { useLanguage } from '@/providers/language-provider'
+import Image from 'next/image'
+import { cn } from '@/lib/utils'
 
 interface PageBannerProps {
   title: string
@@ -12,16 +12,16 @@ interface PageBannerProps {
   subtitleAr?: string
   backgroundImage: string
   icon?: React.ReactNode
-  height?: "sm" | "md" | "lg"
-  align?: "left" | "center"
+  height?: 'sm' | 'md' | 'lg'
+  align?: 'left' | 'center'
   hasSearch?: boolean
   actions?: React.ReactNode
 }
 
 const heightClasses = {
-  sm: "h-[200px]",
-  md: "h-[300px]",
-  lg: "h-[400px]"
+  sm: 'h-[200px]',
+  md: 'h-[300px]',
+  lg: 'h-[400px]',
 }
 
 export default function PageBanner({
@@ -31,21 +31,18 @@ export default function PageBanner({
   subtitleAr,
   backgroundImage,
   icon,
-  height = "md",
-  align = "center",
+  height = 'md',
+  align = 'center',
   hasSearch,
-  actions
+  actions,
 }: PageBannerProps) {
   const { language } = useLanguage()
 
   return (
-    <div 
-      className={cn(
-        "relative w-full overflow-hidden",
-        heightClasses[height]
-      )}
+    <div
+      className={cn('relative w-full overflow-hidden', heightClasses[height])}
       role="banner"
-      aria-label={language === "en" ? title : titleAr}
+      aria-label={language === 'en' ? title : titleAr}
     >
       <div className="absolute inset-0">
         <Image
@@ -58,10 +55,12 @@ export default function PageBanner({
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/95" />
       </div>
 
-      <div 
+      <div
         className={cn(
-          "relative h-full container flex flex-col justify-center",
-          align === "center" ? "items-center text-center" : "items-start text-left"
+          'container relative flex h-full flex-col justify-center',
+          align === 'center'
+            ? 'items-center text-center'
+            : 'items-start text-left'
         )}
       >
         <motion.div
@@ -81,24 +80,24 @@ export default function PageBanner({
                 {icon}
               </motion.div>
             )}
-            <motion.h1 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
+            <motion.h1
+              className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
             >
-              {language === "en" ? title : titleAr}
+              {language === 'en' ? title : titleAr}
             </motion.h1>
           </div>
 
           {(subtitle || subtitleAr) && (
             <motion.p
-              className="text-lg md:text-xl text-muted-foreground max-w-2xl"
+              className="max-w-2xl text-lg text-muted-foreground md:text-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              {language === "en" ? subtitle : subtitleAr}
+              {language === 'en' ? subtitle : subtitleAr}
             </motion.p>
           )}
 
@@ -107,12 +106,12 @@ export default function PageBanner({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="w-full max-w-lg mt-6"
+              className="mt-6 w-full max-w-lg"
             >
               <input
                 type="search"
-                placeholder={language === "en" ? "Search..." : "...بحث"}
-                className="w-full px-4 py-2 rounded-lg bg-background/50 border border-border backdrop-blur-sm focus:border-primary transition-colors"
+                placeholder={language === 'en' ? 'Search...' : '...بحث'}
+                className="w-full rounded-lg border border-border bg-background/50 px-4 py-2 backdrop-blur-sm transition-colors focus:border-primary"
               />
             </motion.div>
           )}
@@ -131,7 +130,7 @@ export default function PageBanner({
       </div>
 
       <motion.div
-        className="absolute inset-0 pointer-events-none"
+        className="pointer-events-none absolute inset-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}

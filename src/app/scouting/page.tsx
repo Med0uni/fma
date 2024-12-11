@@ -1,10 +1,11 @@
-import { Metadata } from "next"
-import PageBanner from "@/components/ui/page-banner"
-import { Search } from "lucide-react"
+import { Metadata } from 'next'
+import PageBanner from '@/components/ui/page-banner'
+import { Search } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: "Scouting - FM Arabia",
-  description: "Discover wonderkids, hidden gems, and player recommendations for Football Manager.",
+  title: 'Scouting - FM Arabia',
+  description:
+    'Discover wonderkids, hidden gems, and player recommendations for Football Manager.',
 }
 
 export default function ScoutingPage() {
@@ -16,7 +17,7 @@ export default function ScoutingPage() {
         subtitle="Find the next generation of superstars and hidden gems."
         subtitleAr="اعثر على الجيل القادم من النجوم والمواهب المخفية."
         backgroundImage="/images/banners/scouting.jpg"
-        icon={<Search className="w-full h-full" />}
+        icon={<Search className="h-full w-full" />}
         hasSearch
       />
       <div className="container py-12">

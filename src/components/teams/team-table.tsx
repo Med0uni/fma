@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { useLanguage } from "@/providers/language-provider"
-import { ArrowUpDown, Star, Dumbbell, Users } from "lucide-react"
-import { useVirtualizer } from "@tanstack/react-virtual"
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from '@/providers/language-provider'
+import { ArrowUpDown, Star, Dumbbell, Users } from 'lucide-react'
+import { useVirtualizer } from '@tanstack/react-virtual'
 
 interface Team {
   id: string
@@ -24,14 +24,21 @@ interface TeamTableProps {
   isLoading?: boolean
 }
 
-type SortField = "rating" | "name" | "league" | "balance" | "budget" | "training" | "youth"
-type SortDirection = "asc" | "desc"
+type SortField =
+  | 'rating'
+  | 'name'
+  | 'league'
+  | 'balance'
+  | 'budget'
+  | 'training'
+  | 'youth'
+type SortDirection = 'asc' | 'desc'
 
 const RatingDisplay = ({ value }: { value: number }) => {
   const getColor = (rating: number) => {
-    if (rating >= 4) return "text-green-500"
-    if (rating >= 3) return "text-yellow-500"
-    return "text-red-500"
+    if (rating >= 4) return 'text-green-500'
+    if (rating >= 3) return 'text-yellow-500'
+    return 'text-red-500'
   }
 
   return (
@@ -44,22 +51,26 @@ const RatingDisplay = ({ value }: { value: number }) => {
 
 export default function TeamTable({ teams, isLoading }: TeamTableProps) {
   const { language } = useLanguage()
-  const [sortField, setSortField] = useState<SortField>("rating")
-  const [sortDirection, setSortDirection] = useState<SortDirection>("desc")
+  const [sortField, setSortField] = useState<SortField>('rating')
+  const [sortDirection, setSortDirection] = useState<SortDirection>('desc')
 
   const handleSort = (field: SortField) => {
     if (field === sortField) {
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc")
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
     } else {
       setSortField(field)
-      setSortDirection("desc")
+      setSortDirection('desc')
     }
   }
 
   const sortedTeams = [...teams].sort((a, b) => {
-    const modifier = sortDirection === "asc" ? 1 : -1
-    if (sortField === "name") {
-      return (language === "en" ? a.name.localeCompare(b.name) : a.nameAr.localeCompare(b.nameAr)) * modifier
+    const modifier = sortDirection === 'asc' ? 1 : -1
+    if (sortField === 'name') {
+      return (
+        (language === 'en'
+          ? a.name.localeCompare(b.name)
+          : a.nameAr.localeCompare(b.nameAr)) * modifier
+      )
     }
     return (a[sortField] - b[sortField]) * modifier
   })
@@ -71,26 +82,34 @@ export default function TeamTable({ teams, isLoading }: TeamTableProps) {
     overscan: 5,
   })
 
-  const SortButton = ({ field, children }: { field: SortField; children: React.ReactNode }) => (
+  const SortButton = ({
+    field,
+    children,
+  }: {
+    field: SortField
+    children: React.ReactNode
+  }) => (
     <button
       onClick={() => handleSort(field)}
-      className="flex items-center gap-1 hover:text-primary transition-colors"
+      className="flex items-center gap-1 transition-colors hover:text-primary"
     >
       {children}
-      <ArrowUpDown className={`h-4 w-4 ${sortField === field ? "text-primary" : "opacity-50"}`} />
+      <ArrowUpDown
+        className={`h-4 w-4 ${sortField === field ? 'text-primary' : 'opacity-50'}`}
+      />
     </button>
   )
 
   if (isLoading) {
     return (
-      <div className="text-center py-12">
-        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
+      <div className="py-12 text-center">
+        <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
       </div>
     )
   }
 
   return (
-    <div className="border rounded-lg overflow-hidden">
+    <div className="overflow-hidden rounded-lg border">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
@@ -99,16 +118,24 @@ export default function TeamTable({ teams, isLoading }: TeamTableProps) {
                 <SortButton field="rating">RAT</SortButton>
               </th>
               <th className="p-4 text-left">
-                <SortButton field="name">{language === "en" ? "Name" : "الاسم"}</SortButton>
+                <SortButton field="name">
+                  {language === 'en' ? 'Name' : 'الاسم'}
+                </SortButton>
               </th>
               <th className="p-4 text-left">
-                <SortButton field="league">{language === "en" ? "League" : "الدوري"}</SortButton>
+                <SortButton field="league">
+                  {language === 'en' ? 'League' : 'الدوري'}
+                </SortButton>
               </th>
               <th className="p-4 text-left">
-                <SortButton field="balance">{language === "en" ? "Balance" : "الرصيد"}</SortButton>
+                <SortButton field="balance">
+                  {language === 'en' ? 'Balance' : 'الرصيد'}
+                </SortButton>
               </th>
               <th className="p-4 text-left">
-                <SortButton field="budget">{language === "en" ? "Budget" : "الميزانية"}</SortButton>
+                <SortButton field="budget">
+                  {language === 'en' ? 'Budget' : 'الميزانية'}
+                </SortButton>
               </th>
               <th className="p-4 text-left">
                 <SortButton field="training">TRA</SortButton>
@@ -127,16 +154,16 @@ export default function TeamTable({ teams, isLoading }: TeamTableProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
-                  className="border-t hover:bg-muted/50 transition-colors cursor-pointer"
+                  className="cursor-pointer border-t transition-colors hover:bg-muted/50"
                 >
                   <td className="p-4">
                     <RatingDisplay value={team.rating} />
                   </td>
                   <td className="p-4 font-medium">
-                    {language === "en" ? team.name : team.nameAr}
+                    {language === 'en' ? team.name : team.nameAr}
                   </td>
                   <td className="p-4 text-muted-foreground">
-                    {language === "en" ? team.league : team.leagueAr}
+                    {language === 'en' ? team.league : team.leagueAr}
                   </td>
                   <td className="p-4">£{team.balance.toLocaleString()}</td>
                   <td className="p-4">£{team.budget.toLocaleString()}</td>

@@ -7,11 +7,11 @@ type MetadataProps = {
 }
 
 export function generateMetadata({
-  title = "FM Arabia",
-  description = "The ultimate Arabic Football Manager community",
-  image = "/og-image.png",
-  type = "website",
-  locale = "en"
+  title = 'FM Arabia',
+  description = 'The ultimate Arabic Football Manager community',
+  image = '/og-image.png',
+  type = 'website',
+  locale = 'en',
 }: MetadataProps = {}) {
   return {
     title: `${title} | FM Arabia`,
@@ -24,7 +24,7 @@ export function generateMetadata({
       locale,
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title,
       description,
       images: [image],

@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { useLanguage } from "@/providers/language-provider"
-import { Coffee, Heart, Sparkles } from "lucide-react"
-import { motion } from "framer-motion"
+import { useLanguage } from '@/providers/language-provider'
+import { Coffee, Heart, Sparkles } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export default function SupportSection() {
   const { language } = useLanguage()
@@ -10,10 +10,10 @@ export default function SupportSection() {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
-      className="rounded-lg overflow-hidden"
+      className="overflow-hidden rounded-lg"
     >
       <div className="relative bg-gradient-to-br from-primary via-purple-500 to-pink-500 p-6 text-white">
-        <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute left-0 top-0 h-full w-full">
           <div className="absolute inset-0 bg-black opacity-10" />
           <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-10" />
         </div>
@@ -27,40 +27,40 @@ export default function SupportSection() {
               transition={{
                 duration: 2,
                 repeat: Infinity,
-                repeatType: "reverse",
+                repeatType: 'reverse',
               }}
             >
               <Coffee className="h-12 w-12" />
             </motion.div>
           </div>
 
-          <div className="text-center space-y-2">
+          <div className="space-y-2 text-center">
             <h3 className="text-xl font-bold">
-              {language === "en" ? "Support FM Arabia" : "ادعم FM Arabia"}
+              {language === 'en' ? 'Support FM Arabia' : 'ادعم FM Arabia'}
             </h3>
             <p className="text-sm text-white/90">
-              {language === "en" 
-                ? "Help us keep the community growing"
-                : "ساعدنا في تنمية المجتمع"}
+              {language === 'en'
+                ? 'Help us keep the community growing'
+                : 'ساعدنا في تنمية المجتمع'}
             </p>
           </div>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full bg-white text-primary font-medium py-3 px-4 rounded-md flex items-center justify-center gap-2 hover:bg-white/90 transition-colors"
+            className="flex w-full items-center justify-center gap-2 rounded-md bg-white px-4 py-3 font-medium text-primary transition-colors hover:bg-white/90"
           >
             <Heart className="h-4 w-4 fill-primary" />
             <span>
-              {language === "en" ? "Become a Supporter" : "كن داعماً"}
+              {language === 'en' ? 'Become a Supporter' : 'كن داعماً'}
             </span>
             <Sparkles className="h-4 w-4" />
           </motion.button>
 
-          <p className="text-xs text-center text-white/80">
-            {language === "en"
-              ? "Join our amazing supporters and get exclusive perks!"
-              : "انضم إلى داعمينا الرائعين واحصل على مزايا حصرية!"}
+          <p className="text-center text-xs text-white/80">
+            {language === 'en'
+              ? 'Join our amazing supporters and get exclusive perks!'
+              : 'انضم إلى داعمينا الرائعين واحصل على مزايا حصرية!'}
           </p>
         </div>
       </div>
