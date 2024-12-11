@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import PageBanner from '@/components/ui/page-banner'
 import { Users } from 'lucide-react'
 import FilterSearch from '@/components/teams/filter-search'
@@ -135,6 +136,10 @@ const mockTeams = [
 ]
 
 export default function TeamsPage() {
+  const handleFiltersChange = (filters: any) => {
+    console.log('Filters changed:', filters)
+  }
+
   return (
     <div>
       <PageBanner
@@ -146,7 +151,7 @@ export default function TeamsPage() {
         icon={<Users className="h-full w-full" />}
       />
       <div className="container space-y-8 py-12">
-        <FilterSearch />
+        <FilterSearch onFiltersChange={handleFiltersChange} />
         <TeamTable teams={mockTeams} />
       </div>
     </div>
