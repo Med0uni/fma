@@ -4,6 +4,7 @@ import PageBanner from '@/components/ui/page-banner'
 import { Users } from 'lucide-react'
 import FilterSearch from '@/components/teams/filter-search'
 import TeamTable from '@/components/teams/team-table'
+import TeamsClient from './teamsClient'
 
 export const metadata: Metadata = {
   title: 'Teams - FM Arabia',
@@ -136,10 +137,6 @@ const mockTeams = [
 ]
 
 export default function TeamsPage() {
-  const handleFiltersChange = (filters: any) => {
-    console.log('Filters changed:', filters)
-  }
-
   return (
     <div>
       <PageBanner
@@ -151,8 +148,7 @@ export default function TeamsPage() {
         icon={<Users className="h-full w-full" />}
       />
       <div className="container space-y-8 py-12">
-        <FilterSearch onFiltersChange={handleFiltersChange} />
-        <TeamTable teams={mockTeams} />
+        <TeamsClient initialTeams={mockTeams} />
       </div>
     </div>
   )
