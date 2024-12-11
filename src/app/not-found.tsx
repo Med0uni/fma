@@ -1,11 +1,19 @@
 'use client'
-
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useLanguage } from '@/providers/language-provider'
 
 export default function NotFound() {
   const { language } = useLanguage()
+
+  const [screenWidth, setScreenWidth] = useState(0)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setScreenWidth(window.innerWidth)
+    }
+  }, [])
 
   return (
     <div className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden">
@@ -69,7 +77,7 @@ export default function NotFound() {
         <motion.div
           className="absolute"
           animate={{
-            x: [-20, window.innerWidth + 20],
+            x: [-20, screenWidth + 20],
             y: [0, 20, -20, 0],
             rotate: 360,
           }}
