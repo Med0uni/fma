@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/providers/language-provider'
 import { ArrowUpDown, Star, Dumbbell, Users } from 'lucide-react'
@@ -65,17 +65,27 @@ export default function TeamTable({ teams, isLoading }: TeamTableProps) {
 
   const sortedTeams = [...teams].sort((a, b) => {
     const modifier = sortDirection === 'asc' ? 1 : -1
-    if (sortField === 'name') {
-      return (
-        (language === 'en'
-          ? a.name.localeCompare(b.name)
-          : a.nameAr.localeCompare(b.nameAr)) * modifier
-      )
+    switch (sortField) {
+      case 'name':
+        return (
+          (language === 'en'
+            ? a.name.localeCompare(b.name)
+            : a.nameAr.localeCompare(b.nameAr)) * modifier
+        )
+      case 'rating':
+      case 'balance':
+      case 'budget':
+      case 'training':
+      case 'youth':
+        return (Number(a[sortField]) - Number(b[sortField])) * modifier
+      default:
+        return 0
     }
-    return (a[sortField] - b[sortField]) * modifier
   })
 
-  const parentRef = useVirtualizer({
+  const parentRef = useRef<HTMLDivElement | null>(null)
+
+  const virtualizer = useVirtualizer({
     count: sortedTeams.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 60,
