@@ -9,6 +9,12 @@ interface TeamPageProps {
   }
 }
 
+export async function generateStaticParams() {
+  return mockTeams.map((team) => ({
+    id: team.id,
+  }))
+}
+
 export async function generateMetadata({
   params,
 }: TeamPageProps): Promise<Metadata> {
