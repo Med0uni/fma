@@ -31,6 +31,7 @@ interface SquadTableProps {
 type SortField =
   | 'name'
   | 'position'
+  | 'nationality'
   | 'age'
   | 'value'
   | 'wage'
@@ -176,14 +177,27 @@ export default function SquadTable({
     })
     .sort((a, b) => {
       const modifier = sortDirection === 'asc' ? 1 : -1
-      if (sortField === 'name') {
+
+      if (sortField === 'name' || sortField === 'nationality') {
         return (
           (language === 'en'
-            ? a.name.localeCompare(b.name)
-            : a.nameAr.localeCompare(b.nameAr)) * modifier
+            ? a[sortField].localeCompare(b[sortField])
+            : a[`${sortField}Ar`]?.localeCompare(b[`${sortField}Ar`])) *
+          modifier
         )
       }
-      return (a[sortField] - b[sortField]) * modifier
+
+      if (
+        ['age', 'value', 'wage', 'currentAbility', 'potentialAbility'].includes(
+          sortField
+        )
+      ) {
+        const aValue = a[sortField] as number
+        const bValue = b[sortField] as number
+        return (aValue - bValue) * modifier
+      }
+
+      return 0 // Default to no change in order for unsupported fields
     })
 
   const SortButton = ({
