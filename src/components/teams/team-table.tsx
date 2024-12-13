@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/providers/language-provider'
 import { ArrowUpDown, Star, Dumbbell, Users } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useVirtualizer } from '@tanstack/react-virtual'
 
 interface Team {
@@ -48,11 +49,15 @@ const RatingDisplay = ({ value }: { value: number }) => {
     </div>
   )
 }
-
 export default function TeamTable({ teams, isLoading }: TeamTableProps) {
   const { language } = useLanguage()
+  const router = useRouter()
   const [sortField, setSortField] = useState<SortField>('rating')
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc')
+
+  const handleTeamClick = (teamId: string) => {
+    router.push(`/teams/${teamId}`)
+  }
 
   const handleSort = (field: SortField) => {
     if (field === sortField) {
@@ -117,7 +122,6 @@ export default function TeamTable({ teams, isLoading }: TeamTableProps) {
       </div>
     )
   }
-
   return (
     <div className="overflow-hidden rounded-lg border">
       <div className="overflow-x-auto">
@@ -165,6 +169,7 @@ export default function TeamTable({ teams, isLoading }: TeamTableProps) {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
                   className="cursor-pointer border-t transition-colors hover:bg-muted/50"
+                  onClick={() => handleTeamClick(team.id)}
                 >
                   <td className="p-4">
                     <RatingDisplay value={team.rating} />
@@ -188,7 +193,7 @@ export default function TeamTable({ teams, isLoading }: TeamTableProps) {
                       <Users className="h-4 w-4 text-primary" />
                       {team.youth}
                     </div>
-                  </td>
+                  </td>{' '}
                 </motion.tr>
               ))}
             </AnimatePresence>
