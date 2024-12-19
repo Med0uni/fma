@@ -4,6 +4,7 @@ import SocialPanel from '@/components/social/SocialPanel'
 import ScoutingSection from '@/components/sections/ScoutingSection'
 import TacticsSection from '@/components/sections/TacticsSection'
 import SaveIdeasSection from '@/components/sections/SaveIdeasSection'
+import FMGuidesSection from '@/components/sections/FMGuidesSection'
 import SupportSection from '@/components/sections/SupportSection'
 import NewsletterSection from '@/components/sections/NewsletterSection'
 
@@ -31,6 +32,7 @@ export default function Home() {
           <div className="flex flex-col gap-8 lg:flex-row">
             <div className="lg:w-3/4">
               <SaveIdeasSection />
+              <FMGuidesSection />
             </div>
             <div className="lg:w-1/4">
               <div className="sticky-until-news">

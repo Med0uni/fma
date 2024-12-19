@@ -4,8 +4,9 @@ import { useLanguage } from '@/providers/language-provider'
 import Link from 'next/link'
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Trophy, Users, Coins } from 'lucide-react'
 import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const demoSaveIdeas = [
   {
@@ -20,6 +21,12 @@ const demoSaveIdeas = [
     categoryAr: 'طريق المجد',
     image: '/images/saves/road-to-glory.jpg',
     slug: 'non-league-to-champions',
+    difficulty: 'Hard',
+    difficultyAr: 'صعب',
+    duration: 'Long Term',
+    durationAr: 'طويل المدى',
+    budget: 'Low',
+    budgetAr: 'منخفضة',
   },
   {
     title: 'Ajax Youth Development Challenge',
@@ -33,6 +40,12 @@ const demoSaveIdeas = [
     categoryAr: 'أكاديمية الشباب',
     image: '/images/saves/ajax-youth.jpg',
     slug: 'ajax-youth-challenge',
+    difficulty: 'Medium',
+    difficultyAr: 'متوسط',
+    duration: 'Medium Term',
+    durationAr: 'متوسط المدى',
+    budget: 'Medium',
+    budgetAr: 'متوسطة',
   },
   {
     title: 'Moneyball in Serie A',
@@ -46,6 +59,12 @@ const demoSaveIdeas = [
     categoryAr: 'التحدي المالي',
     image: '/images/saves/moneyball.jpg',
     slug: 'moneyball-serie-a',
+    difficulty: 'Hard',
+    difficultyAr: 'صعب',
+    duration: 'Short Term',
+    durationAr: 'قصير المدى',
+    budget: 'Low',
+    budgetAr: 'منخفضة',
   },
   {
     title: "Restore AC Milan's Glory",
@@ -59,38 +78,52 @@ const demoSaveIdeas = [
     categoryAr: 'العملاق الساقط',
     image: '/images/saves/milan.jpg',
     slug: 'restore-milan-glory',
-  },
-  {
-    title: 'Build a National Dynasty',
-    titleAr: 'بناء سلالة وطنية',
-    excerpt:
-      'Guide a nation from international obscurity to World Cup glory over multiple tournaments.',
-    excerptAr:
-      'قد منتخبًا من الغموض الدولي إلى مجد كأس العالم عبر بطولات متعددة.',
-    date: '2024-02-11',
-    category: 'International',
-    categoryAr: 'دولي',
-    image: '/images/saves/national.jpg',
-    slug: 'national-dynasty',
+    difficulty: 'Medium',
+    difficultyAr: 'متوسط',
+    duration: 'Long Term',
+    durationAr: 'طويل المدى',
+    budget: 'High',
+    budgetAr: 'عالية',
   },
 ]
+
+const getDifficultyColor = (difficulty: string) => {
+  switch (difficulty.toLowerCase()) {
+    case 'easy':
+      return 'bg-green-500/10 text-green-500'
+    case 'medium':
+      return 'bg-yellow-500/10 text-yellow-500'
+    case 'hard':
+      return 'bg-red-500/10 text-red-500'
+    default:
+      return 'bg-primary/10 text-primary'
+  }
+}
+
 export default function SaveIdeasSection() {
   const { language } = useLanguage()
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    dragFree: true,
+    align: 'start',
+  })
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [canScrollPrev, setCanScrollPrev] = useState(false)
+  const [canScrollNext, setCanScrollNext] = useState(true)
 
-  const scrollPrev = useCallback(
-    () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi]
-  )
-  const scrollNext = useCallback(
-    () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi]
-  )
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev()
+  }, [emblaApi])
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return
     setSelectedIndex(emblaApi.selectedScrollSnap())
+    setCanScrollPrev(emblaApi.canScrollPrev())
+    setCanScrollNext(emblaApi.canScrollNext())
   }, [emblaApi])
 
   useEffect(() => {
@@ -101,85 +134,134 @@ export default function SaveIdeasSection() {
   }, [emblaApi, onSelect])
 
   return (
-    <div className="h-full overflow-hidden rounded-lg bg-secondary/50">
+    <div className="overflow-hidden rounded-lg bg-gradient-to-br from-secondary/50 via-secondary/30 to-transparent backdrop-blur-sm">
       <div className="p-6">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-2xl font-bold">
-            {language === 'en' ? 'Save Ideas' : 'أفكار اللعب'}
-          </h2>
-          <Link href="/save-ideas" className="text-primary hover:underline">
-            {language === 'en' ? 'View All' : 'عرض المزيد'}
-          </Link>
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold">
+              {language === 'en' ? 'Save Ideas' : 'أفكار اللعب'}
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {language === 'en'
+                ? 'Find your next FM adventure'
+                : 'اعثر على مغامرتك القادمة في FM'}
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={scrollPrev}
+              className="rounded-full bg-background/80 p-2 shadow-lg backdrop-blur-sm transition-colors hover:bg-background disabled:opacity-50"
+              disabled={!canScrollPrev}
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={scrollNext}
+              className="rounded-full bg-background/80 p-2 shadow-lg backdrop-blur-sm transition-colors hover:bg-background disabled:opacity-50"
+              disabled={!canScrollNext}
+            >
+              <ChevronRight className="h-5 w-5" />
+            </motion.button>
+          </div>
         </div>
 
-        <div className="relative">
-          {/* Navigation Arrows */}
-          <button
-            onClick={scrollPrev}
-            className="absolute left-0 top-1/2 z-10 -ml-4 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-lg backdrop-blur-sm hover:bg-background"
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </button>
-          <button
-            onClick={scrollNext}
-            className="absolute right-0 top-1/2 z-10 -mr-4 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-lg backdrop-blur-sm hover:bg-background"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </button>
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-6">
+            {demoSaveIdeas.map((idea, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="min-w-[300px] flex-[0_0_80%] md:flex-[0_0_45%] lg:flex-[0_0_400px]"
+              >
+                <Link
+                  href={`/save-ideas/${idea.slug}`}
+                  className="group block h-full overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-lg"
+                >
+                  <div className="relative h-48">
+                    <Image
+                      src={idea.image}
+                      alt={language === 'en' ? idea.title : idea.titleAr}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
+                    
+                    {/* Category Badge */}
+                    <div className="absolute bottom-4 left-4 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary backdrop-blur-sm">
+                      {language === 'en' ? idea.category : idea.categoryAr}
+                    </div>
+                    
+                    {/* Difficulty Badge */}
+                    <div
+                      className={`absolute right-4 top-4 rounded-full px-3 py-1 text-sm font-medium backdrop-blur-sm ${getDifficultyColor(
+                        idea.difficulty
+                      )}`}
+                    >
+                      {language === 'en'
+                        ? idea.difficulty
+                        : idea.difficultyAr}
+                    </div>
+                  </div>
 
-          {/* Carousel */}
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex">
-              {demoSaveIdeas.map((idea, index) => (
-                <div key={index} className="min-w-0 flex-[0_0_100%]">
-                  <Link href={`/save-ideas/${idea.slug}`}>
-                    <div className="group mx-4 overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:border-primary/50">
-                      <div className="relative h-[200px]">
-                        <Image
-                          src={idea.image}
-                          alt={language === 'en' ? idea.title : idea.titleAr}
-                          fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                        <div className="absolute bottom-4 left-4">
-                          <span className="rounded-md bg-primary/10 px-2 py-1 text-sm text-primary">
-                            {language === 'en'
-                              ? idea.category
-                              : idea.categoryAr}
-                          </span>
-                        </div>
+                  <div className="p-6">
+                    <h3 className="mb-2 text-xl font-bold transition-colors group-hover:text-primary">
+                      {language === 'en' ? idea.title : idea.titleAr}
+                    </h3>
+                    <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">
+                      {language === 'en' ? idea.excerpt : idea.excerptAr}
+                    </p>
+
+                    {/* Stats Grid */}
+                    <div className="mt-6 grid grid-cols-3 gap-4 border-t pt-4">
+                      <div className="text-center">
+                        <Trophy className="mx-auto mb-1 h-4 w-4 text-primary" />
+                        <span className="text-xs text-muted-foreground">
+                          {language === 'en'
+                            ? idea.duration
+                            : idea.durationAr}
+                        </span>
                       </div>
-                      <div className="p-6">
-                        <h3 className="mb-3 text-xl font-semibold transition-colors group-hover:text-primary">
-                          {language === 'en' ? idea.title : idea.titleAr}
-                        </h3>
-                        <p className="text-muted-foreground">
-                          {language === 'en' ? idea.excerpt : idea.excerptAr}
-                        </p>
-                        <div className="mt-4 text-sm text-muted-foreground">
-                          {idea.date}
-                        </div>
+                      <div className="text-center">
+                        <Users className="mx-auto mb-1 h-4 w-4 text-primary" />
+                        <span className="text-xs text-muted-foreground">
+                          {language === 'en'
+                            ? idea.difficulty
+                            : idea.difficultyAr}
+                        </span>
+                      </div>
+                      <div className="text-center">
+                        <Coins className="mx-auto mb-1 h-4 w-4 text-primary" />
+                        <span className="text-xs text-muted-foreground">
+                          {language === 'en' ? idea.budget : idea.budgetAr}
+                        </span>
                       </div>
                     </div>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Dots */}
-          <div className="mt-6 flex justify-center gap-2">
-            {demoSaveIdeas.map((_, index) => (
-              <button
-                key={index}
-                className={`h-2 w-2 rounded-full transition-colors ${
-                  index === selectedIndex ? 'bg-primary' : 'bg-primary/30'
-                }`}
-                onClick={() => emblaApi?.scrollTo(index)}
-              />
+                  </div>
+                </Link>
+              </motion.div>
             ))}
           </div>
+        </div>
+
+        {/* Progress Dots */}
+        <div className="mt-6 flex justify-center gap-2">
+          {demoSaveIdeas.map((_, index) => (
+            <button
+              key={index}
+              className={`h-1.5 rounded-full transition-all ${
+                index === selectedIndex
+                  ? 'w-6 bg-primary'
+                  : 'w-1.5 bg-primary/30'
+              }`}
+              onClick={() => emblaApi?.scrollTo(index)}
+            />
+          ))}
         </div>
       </div>
     </div>

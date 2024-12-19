@@ -1,0 +1,50 @@
+@layer utilities {
+  /* Button Hover Effects */
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  /* Menu Item Hover Animation */
+  .menu-item {
+    @apply relative;
+  }
+
+  .menu-item::after {
+    @apply absolute bottom-0 left-0 h-0.5 w-0 bg-primary content-[''];
+    transition: width 0.2s ease-in-out;
+  }
+
+  .menu-item:hover::after {
+    @apply w-full;
+  }
+
+  /* Form Input Focus Effects */
+  .input-focus-effect {
+    @apply transition-all duration-200;
+  }
+
+  .input-focus-effect:focus {
+    @apply ring-2 ring-primary ring-offset-2;
+  }
+
+  /* Parallax Container */
+  .parallax-container {
+    @apply relative overflow-hidden;
+    transform-style: preserve-3d;
+  }
+
+  .parallax-element {
+    @apply absolute;
+    transform: translateZ(-10px) scale(2);
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
