@@ -4,7 +4,9 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
-interface AnimatedCardProps extends React.HTMLAttributes<HTMLDivElement> {
+import type { HTMLMotionProps } from 'framer-motion'
+
+interface AnimatedCardProps extends HTMLMotionProps<'div'> {
   children: React.ReactNode
   className?: string
   intensity?: number
@@ -33,12 +35,12 @@ export function AnimatedCard({
     }
   )
 
-  function onMouseMove({
-    currentTarget,
-    clientX,
-    clientY,
-  }: React.MouseEvent<HTMLDivElement>) {
+  function onMouseMove(event: React.MouseEvent<HTMLDivElement>) {
+    const currentTarget = event.currentTarget
     const { left, top, width, height } = currentTarget.getBoundingClientRect()
+    const clientX = event.clientX
+    const clientY = event.clientY
+
     mouseX.set((clientX - left) / width - 0.5)
     mouseY.set((clientY - top) / height - 0.5)
   }
