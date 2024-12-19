@@ -54,8 +54,7 @@ const guides = [
     titleAr: 'التحليل التكتيكي المتقدم',
     excerpt:
       'Deep dive into tactical analysis, player roles, and creating winning formations.',
-    excerptAr:
-      'تعمق في التحليل التكتيكي وأدوار اللاعبين وإنشاء تشكيلات فائزة.',
+    excerptAr: 'تعمق في التحليل التكتيكي وأدوار اللاعبين وإنشاء تشكيلات فائزة.',
     category: 'Tactics',
     categoryAr: 'التكتيكات',
     icon: Gamepad2,
@@ -70,8 +69,7 @@ const guides = [
     titleAr: 'نصائح الإدارة المالية',
     excerpt:
       'Learn how to balance the books, manage wages, and build a sustainable club.',
-    excerptAr:
-      'تعلم كيفية موازنة الدفاتر وإدارة الأجور وبناء نادٍ مستدام.',
+    excerptAr: 'تعلم كيفية موازنة الدفاتر وإدارة الأجور وبناء نادٍ مستدام.',
     category: 'Finance',
     categoryAr: 'المالية',
     icon: LineChart,
@@ -146,9 +144,7 @@ export default function FMGuidesSection() {
                       guide.difficulty
                     )}`}
                   >
-                    {language === 'en'
-                      ? guide.difficulty
-                      : guide.difficultyAr}
+                    {language === 'en' ? guide.difficulty : guide.difficultyAr}
                   </span>
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Clock className="h-3 w-3" />
@@ -206,9 +202,7 @@ export default function FMGuidesSection() {
               <div className="mb-4 flex items-center gap-2">
                 <Shield className="h-5 w-5 text-primary" />
                 <span className="text-sm font-medium text-primary">
-                  {language === 'en'
-                    ? 'Featured Guide'
-                    : 'الدليل المميز'}
+                  {language === 'en' ? 'Featured Guide' : 'الدليل المميز'}
                 </span>
               </div>
 
@@ -227,12 +221,16 @@ export default function FMGuidesSection() {
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <Clock className="h-4 w-4" />
-                  <span>30 {language === 'en' ? 'min read' : 'دقيقة قراءة'}</span>
+                  <span>
+                    30 {language === 'en' ? 'min read' : 'دقيقة قراءة'}
+                  </span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Trophy className="h-4 w-4" />
                   <span>
-                    {language === 'en' ? 'Beginner Friendly' : 'مناسب للمبتدئين'}
+                    {language === 'en'
+                      ? 'Beginner Friendly'
+                      : 'مناسب للمبتدئين'}
                   </span>
                 </div>
               </div>

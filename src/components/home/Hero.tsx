@@ -5,7 +5,15 @@ import { useCallback } from 'react'
 import Particles from 'react-tsparticles'
 import { loadSlim } from '@tsparticles/slim'
 import { useLanguage } from '@/providers/language-provider'
-import { ArrowRight, ChevronDown, Search, Users, Trophy, Star, Database } from 'lucide-react'
+import {
+  ArrowRight,
+  ChevronDown,
+  Search,
+  Users,
+  Trophy,
+  Star,
+  Database,
+} from 'lucide-react'
 import TacticalBoard from '../tactical-board/TacticalBoard'
 
 const Hero = () => {
@@ -25,7 +33,7 @@ const Hero = () => {
   return (
     <div className="relative min-h-[calc(100vh-4rem)] bg-gradient-to-b from-background via-background/95 to-background">
       {/* Tactical Grid Background */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `
@@ -156,7 +164,11 @@ const Hero = () => {
               <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
               <input
                 type="search"
-                placeholder={language === 'en' ? 'Search tactics, wonderkids, guides...' : 'ابحث عن التكتيكات، المواهب، الأدلة...'}
+                placeholder={
+                  language === 'en'
+                    ? 'Search tactics, wonderkids, guides...'
+                    : 'ابحث عن التكتيكات، المواهب، الأدلة...'
+                }
                 className="w-full rounded-lg border bg-card/50 py-3 pl-10 pr-4 backdrop-blur-sm transition-colors focus:border-primary"
               />
             </motion.div>

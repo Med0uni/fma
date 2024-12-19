@@ -17,16 +17,16 @@ export function ScrollReveal({
   className,
   delay = 0,
   duration = 0.5,
-  direction = 'up'
+  direction = 'up',
 }: ScrollRevealProps) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const directionVariants = {
     up: { y: 50 },
     down: { y: -50 },
     left: { x: 50 },
-    right: { x: -50 }
+    right: { x: -50 },
   }
 
   return (
@@ -34,17 +34,21 @@ export function ScrollReveal({
       ref={ref}
       initial={{
         opacity: 0,
-        ...directionVariants[direction]
+        ...directionVariants[direction],
       }}
-      animate={isInView ? {
-        opacity: 1,
-        x: 0,
-        y: 0
-      } : {}}
+      animate={
+        isInView
+          ? {
+              opacity: 1,
+              x: 0,
+              y: 0,
+            }
+          : {}
+      }
       transition={{
         duration,
         delay,
-        ease: "easeOut"
+        ease: 'easeOut',
       }}
       className={className}
     >

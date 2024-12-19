@@ -13,7 +13,7 @@ export function StaggerList({
   children,
   className,
   delay = 0,
-  staggerDelay = 0.1
+  staggerDelay = 0.1,
 }: StaggerListProps) {
   return (
     <motion.div
@@ -23,9 +23,9 @@ export function StaggerList({
         visible: {
           transition: {
             staggerChildren: staggerDelay,
-            delayChildren: delay
-          }
-        }
+            delayChildren: delay,
+          },
+        },
       }}
       className={className}
     >
@@ -34,7 +34,7 @@ export function StaggerList({
           key={index}
           variants={{
             hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0 }
+            visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 0.5 }}
         >

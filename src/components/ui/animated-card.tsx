@@ -20,14 +20,24 @@ export function AnimatedCard({
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [intensity, -intensity]), {
-    damping: 20
-  })
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-intensity, intensity]), {
-    damping: 20
-  })
+  const rotateX = useSpring(
+    useTransform(mouseY, [-0.5, 0.5], [intensity, -intensity]),
+    {
+      damping: 20,
+    }
+  )
+  const rotateY = useSpring(
+    useTransform(mouseX, [-0.5, 0.5], [-intensity, intensity]),
+    {
+      damping: 20,
+    }
+  )
 
-  function onMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent<HTMLDivElement>) {
+  function onMouseMove({
+    currentTarget,
+    clientX,
+    clientY,
+  }: React.MouseEvent<HTMLDivElement>) {
     const { left, top, width, height } = currentTarget.getBoundingClientRect()
     mouseX.set((clientX - left) / width - 0.5)
     mouseY.set((clientY - top) / height - 0.5)
@@ -48,7 +58,7 @@ export function AnimatedCard({
       }}
       style={{
         perspective: 1000,
-        transformStyle: 'preserve-3d'
+        transformStyle: 'preserve-3d',
       }}
       {...props}
     >
@@ -57,18 +67,18 @@ export function AnimatedCard({
         style={{
           rotateX,
           rotateY,
-          transformStyle: 'preserve-3d'
+          transformStyle: 'preserve-3d',
         }}
       >
         {children}
       </motion.div>
-      
+
       {/* Hover Gradient Effect */}
       <motion.div
         className="absolute inset-0 z-0 bg-gradient-to-br from-primary/0 via-primary/5 to-primary/0 opacity-0 transition-opacity group-hover:opacity-100"
         animate={{
           opacity: isHovered ? 1 : 0,
-          scale: isHovered ? 1.05 : 1
+          scale: isHovered ? 1.05 : 1,
         }}
         transition={{ duration: 0.2 }}
       />

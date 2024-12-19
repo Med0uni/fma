@@ -191,21 +191,19 @@ export default function SaveIdeasSection() {
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
-                    
+
                     {/* Category Badge */}
                     <div className="absolute bottom-4 left-4 rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary backdrop-blur-sm">
                       {language === 'en' ? idea.category : idea.categoryAr}
                     </div>
-                    
+
                     {/* Difficulty Badge */}
                     <div
                       className={`absolute right-4 top-4 rounded-full px-3 py-1 text-sm font-medium backdrop-blur-sm ${getDifficultyColor(
                         idea.difficulty
                       )}`}
                     >
-                      {language === 'en'
-                        ? idea.difficulty
-                        : idea.difficultyAr}
+                      {language === 'en' ? idea.difficulty : idea.difficultyAr}
                     </div>
                   </div>
 
@@ -222,9 +220,7 @@ export default function SaveIdeasSection() {
                       <div className="text-center">
                         <Trophy className="mx-auto mb-1 h-4 w-4 text-primary" />
                         <span className="text-xs text-muted-foreground">
-                          {language === 'en'
-                            ? idea.duration
-                            : idea.durationAr}
+                          {language === 'en' ? idea.duration : idea.durationAr}
                         </span>
                       </div>
                       <div className="text-center">

@@ -12,20 +12,20 @@ const tactics = [
     title: 'Gegenpress 4-3-3',
     downloads: '2.5k',
     rating: 4.8,
-    image: '/images/tactics/tactic1.jpg'
+    image: '/images/tactics/tactic1.jpg',
   },
   {
     title: 'Tiki-Taka 4-2-3-1',
     downloads: '1.8k',
     rating: 4.7,
-    image: '/images/tactics/tactic2.jpg'
+    image: '/images/tactics/tactic2.jpg',
   },
   {
     title: 'Counter-Attack 5-3-2',
     downloads: '1.2k',
     rating: 4.6,
-    image: '/images/tactics/tactic3.jpg'
-  }
+    image: '/images/tactics/tactic3.jpg',
+  },
 ]
 
 export default function FeaturedTactics() {
@@ -34,7 +34,7 @@ export default function FeaturedTactics() {
       <ScrollReveal>
         <div className="container">
           <div className="mb-12 text-center">
-            <motion.h2 
+            <motion.h2
               className="text-3xl font-bold"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
