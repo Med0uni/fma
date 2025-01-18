@@ -40,7 +40,7 @@ const Hero = () => {
           className="h-full w-full object-cover 
           "
         />
-        <div className="from-herobackground/60 to-herobackground absolute inset-0 bg-opacity-90 bg-gradient-to-b"></div>
+        <div className="absolute inset-0 bg-opacity-90 bg-gradient-to-b from-herobackground/60 to-herobackground"></div>
       </div>
       {/* Main Content */}
       <div className="container relative">

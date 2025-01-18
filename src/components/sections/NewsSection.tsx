@@ -1,6 +1,10 @@
 'use client'
 
 import { useLanguage } from '@/providers/language-provider'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { fetchArticles } from '@/services/articlesService'
+import { Article } from '@/types/article'
 import NewsCard from '@/components/news/NewsCard'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
@@ -8,7 +12,7 @@ import { ArrowRight } from 'lucide-react'
 const demoNews = [
   {
     title: 'FM24 Winter Update Released',
-    titleAr: 'إصدار تحديث FM24 الشتوي',
+    titleAr: 'إصدار تحديث  الشتوي',
     excerpt:
       'The latest database update includes all January transfers and various gameplay improvements.',
     excerptAr:
@@ -31,6 +35,7 @@ const demoNews = [
     slug: 'top-wonderkids-fm24',
     image: '/images/news/wonderkids.jpg',
   },
+  //4b6f6cb3e22f1f2ecbba78e8c97f5f9a720c5c52623eead0d8479d0e1cb07296153e9341add7212bfd8a653d8ff80c59a5098131455eb527a566f0e0371d9e3bf162dd570f23686f45352cd1864cfea71256975506bea6107e997a15d067f0fc3d9812c95dd119389043979d271465711872c3c0b3fa96a2a75ede621a9aaaaa
   {
     title: 'New Tactical Analysis Feature',
     titleAr: 'ميزة التحليل التكتيكي الجديدة',
@@ -59,9 +64,27 @@ const demoNews = [
 
 export default function NewsSection() {
   const { language } = useLanguage()
+  const [articles, setArticles] = useState<Article[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadArticles() {
+      try {
+        const data = await fetchArticles()
+        console.log('Articles:', articles)
+        setArticles(data)
+      } catch (error) {
+        console.error('Error loading articles:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadArticles()
+  }, [])
 
   return (
-    <div className="flex flex-col gap-8 ">
+    <div className="flex flex-col gap-8">
       <div className="mb-8 flex items-center justify-between">
         <h2 className="text-3xl font-bold">
           {language === 'en' ? 'Latest News' : 'آخر الأخبار'}
@@ -74,11 +97,18 @@ export default function NewsSection() {
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
-      <div className="grid gap-6">
-        {demoNews.map((news, index) => (
-          <NewsCard key={index} {...news} />
-        ))}
-      </div>
+
+      {loading ? (
+        <div className="text-center">
+          {language === 'en' ? 'Loading...' : 'جاري التحميل...'}
+        </div>
+      ) : (
+        <div className="grid gap-6">
+          {articles.map((article) => (
+            <NewsCard key={article.id} {...article} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
