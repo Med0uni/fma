@@ -29,7 +29,7 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* Download Section */}
+            {/* Download Section 
             <div>
               <h3 className="mb-4 text-sm font-semibold">
                 {language === 'en'
@@ -53,7 +53,7 @@ export default function Footer() {
                 </a>
               </div>
             </div>
-
+*/}
             {/* Social Links */}
             <div>
               <h3 className="mb-4 text-sm font-semibold">

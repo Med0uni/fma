@@ -21,7 +21,7 @@ export default function TeamsPage() {
         titleAr="دليل الفرق"
         subtitle="Discover comprehensive guides and strategies for managing different teams."
         subtitleAr="اكتشف أدلة واستراتيجيات شاملة لإدارة الفرق المختلفة."
-        backgroundImage="/images/banners/teams.jpg"
+        backgroundImage="/assets/banners/teams.jpeg"
         icon={<Users className="h-full w-full" />}
       />
       <div className="container space-y-8 py-12">

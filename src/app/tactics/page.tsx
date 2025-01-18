@@ -16,7 +16,7 @@ export default function TacticsPage() {
         titleAr="التكتيكات"
         subtitle="Explore winning formations and strategies from the community."
         subtitleAr="استكشف التشكيلات والاستراتيجيات الناجحة من المجتمع."
-        backgroundImage="/images/banners/tactics.jpg"
+        backgroundImage="/assets/banners/tactics.jpg_large"
         icon={<Gamepad2 className="h-full w-full" />}
         hasSearch
       />

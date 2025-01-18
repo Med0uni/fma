@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
+import { motion } from 'framer-motion'
 import {
   Menu,
   Moon,
@@ -37,7 +38,12 @@ export default function Header() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <motion.header
+      className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+    >
       <div className="container flex h-16 items-center justify-between gap-4">
         <div className="flex flex-1 items-center gap-4 md:flex-initial">
           <button
@@ -168,6 +174,6 @@ export default function Header() {
           </nav>
         </div>
       )}
-    </header>
+    </motion.header>
   )
 }

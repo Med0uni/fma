@@ -16,7 +16,7 @@ export default function DownloadsPage() {
         titleAr="التحميلات"
         subtitle="Access tactics, skins, and other essential resources for your FM journey."
         subtitleAr="الوصول إلى التكتيكات والمظاهر وغيرها من الموارد الأساسية لرحلتك في FM."
-        backgroundImage="/images/banners/downloads.jpg"
+        backgroundImage="/assets/banners/banner1.jpg"
         icon={<Download className="h-full w-full" />}
         hasSearch
       />

@@ -3,6 +3,7 @@
 import { useLanguage } from '@/providers/language-provider'
 import Link from 'next/link'
 import TacticCard from '../cards/TacticCard'
+import { ArrowRight } from 'lucide-react'
 
 const demoTactics = [
   {
@@ -52,8 +53,12 @@ export default function TacticsSection() {
         <h2 className="text-2xl font-bold">
           {language === 'en' ? 'Popular Tactics' : 'التكتيكات الشائعة'}
         </h2>
-        <Link href="/tactics" className="text-primary hover:underline">
-          {language === 'en' ? 'View All' : 'عرض المزيد'}
+        <Link
+          href="/tactics"
+          className="group flex items-center gap-2 text-sm text-primary transition-colors hover:text-primary/80"
+        >
+          <span>{language === 'en' ? 'View All' : 'عرض المزيد'}</span>
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
       <div className="grid gap-4">

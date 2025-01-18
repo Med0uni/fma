@@ -3,6 +3,7 @@
 import { useLanguage } from '@/providers/language-provider'
 import NewsCard from '@/components/news/NewsCard'
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 const demoNews = [
   {
@@ -67,9 +68,10 @@ export default function NewsSection() {
         </h2>
         <Link
           href="/news"
-          className="inline-flex items-center gap-2 text-primary hover:underline"
+          className="group flex items-center gap-2 text-sm text-primary transition-colors hover:text-primary/80"
         >
-          {language === 'en' ? 'View All' : 'عرض المزيد'}
+          <span>{language === 'en' ? 'View All' : 'عرض المزيد'}</span>
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
       <div className="grid gap-6">

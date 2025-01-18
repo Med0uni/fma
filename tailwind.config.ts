@@ -33,6 +33,10 @@ const config: Config = {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
         },
+        herobackground: {
+          DEFAULT: 'hsl(var(--herobackground))',
+          60: 'hsla(var(--herobackground), 0.8)', // Add opacity here
+        },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',

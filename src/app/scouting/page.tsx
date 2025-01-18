@@ -16,7 +16,7 @@ export default function ScoutingPage() {
         titleAr="شبكة الكشافة"
         subtitle="Find the next generation of superstars and hidden gems."
         subtitleAr="اعثر على الجيل القادم من النجوم والمواهب المخفية."
-        backgroundImage="/images/banners/scouting.jpg"
+        backgroundImage="/assets/banners/scouting.jpg"
         icon={<Search className="h-full w-full" />}
         hasSearch
       />

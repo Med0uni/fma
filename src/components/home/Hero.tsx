@@ -32,18 +32,16 @@ const Hero = () => {
 
   return (
     <div className="relative min-h-[calc(100vh-4rem)] bg-gradient-to-b from-background via-background/95 to-background">
-      {/* Tactical Grid Background */}
-      <div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, var(--primary) 1px, transparent 1px),
-            linear-gradient(to bottom, var(--primary) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-        }}
-      />
-
+      {/* Background Image */}
+      <div className="absolute inset-0 ">
+        <img
+          src="/assets/bg-lg.jpg"
+          alt="Background"
+          className="h-full w-full object-cover 
+          "
+        />
+        <div className="from-herobackground/60 to-herobackground absolute inset-0 bg-opacity-90 bg-gradient-to-b"></div>
+      </div>
       {/* Main Content */}
       <div className="container relative">
         <div className="grid min-h-[calc(100vh-4rem)] grid-cols-1 items-center gap-8 lg:grid-cols-2">
@@ -80,9 +78,9 @@ const Hero = () => {
               <h1 className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
                 {language === 'en' ? (
                   <>
-                    Where
+                    Tactics,
                     <span className="relative mx-3 text-primary">
-                      Tactics
+                      Insights,
                       <motion.div
                         className="absolute -inset-2 -z-10 opacity-20 blur-xl"
                         animate={{
@@ -95,9 +93,9 @@ const Hero = () => {
                         transition={{ duration: 5, repeat: Infinity }}
                       />
                     </span>
-                    Meet
+                    Mods,
                     <span className="relative mx-3 text-primary">
-                      Success
+                      Community
                       <motion.div
                         className="absolute -inset-2 -z-10 opacity-20 blur-xl"
                         animate={{
@@ -169,7 +167,7 @@ const Hero = () => {
                     ? 'Search tactics, wonderkids, guides...'
                     : 'ابحث عن التكتيكات، المواهب، الأدلة...'
                 }
-                className="w-full rounded-lg border bg-card/50 py-3 pl-10 pr-4 backdrop-blur-sm transition-colors focus:border-primary"
+                className="w-full rounded-lg border bg-card/50 py-3 pl-10 pr-4  transition-colors focus:border-primary"
               />
             </motion.div>
 

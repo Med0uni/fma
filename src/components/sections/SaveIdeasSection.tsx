@@ -85,6 +85,25 @@ const demoSaveIdeas = [
     budget: 'High',
     budgetAr: 'عالية',
   },
+  {
+    title: "Restore AC Milan's Glory",
+    titleAr: 'استعادة مجد ميلان',
+    excerpt:
+      'Take control of AC Milan and bring back their European dominance. A perfect fallen giant challenge.',
+    excerptAr:
+      'تولى إدارة ميلان وأعد هيمنتهم الأوروبية. تحدي مثالي للعملاق الساقط.',
+    date: '2024-02-12',
+    category: 'Fallen Giant',
+    categoryAr: 'العملاق الساقط',
+    image: '/images/saves/milan.jpg',
+    slug: 'restore-milan-glory',
+    difficulty: 'Medium',
+    difficultyAr: 'متوسط',
+    duration: 'Long Term',
+    durationAr: 'طويل المدى',
+    budget: 'High',
+    budgetAr: 'عالية',
+  },
 ]
 
 const getDifficultyColor = (difficulty: string) => {

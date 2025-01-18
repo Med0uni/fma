@@ -16,7 +16,7 @@ export default function NewsPage() {
         titleAr="آخر الأخبار"
         subtitle="Stay updated with the latest Football Manager news, updates, and community highlights."
         subtitleAr="ابق على اطلاع بآخر أخبار Football Manager والتحديثات وأبرز أحداث المجتمع."
-        backgroundImage="/images/banners/news.jpg"
+        backgroundImage="/assets/banners/press.jpg"
         icon={<Newspaper className="h-full w-full" />}
         hasSearch
       />

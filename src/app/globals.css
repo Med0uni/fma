@@ -4,7 +4,8 @@
 
 @layer base {
   :root {
-    /* Light theme - Fotmob inspired */
+    --herobackground: 0 0% 100%; /* Light mode */
+
     --background: 0 0% 100%;
     --foreground: 220 9% 15%;
 
@@ -37,7 +38,8 @@
   }
 
   .dark {
-    /* Dark theme - Fotmob inspired */
+    --herobackground: 222 47% 11%;
+
     --background: 222 47% 11%;
     --foreground: 0 0% 100%;
 
@@ -77,7 +79,6 @@
   }
 }
 
-/* RTL Support */
 [dir='rtl'] {
   .container {
     @apply text-right;
@@ -87,7 +88,6 @@
     @apply space-x-reverse;
   }
 
-  /* RTL specific adjustments for search */
   .search-icon {
     @apply left-auto right-3;
   }
@@ -97,7 +97,6 @@
   }
 }
 
-/* Focus styles */
 input:focus {
   @apply outline-none ring-2 ring-primary ring-offset-0;
 }
@@ -118,5 +117,28 @@ input:focus {
   .sticky-until-news {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

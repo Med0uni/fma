@@ -16,7 +16,7 @@ export default function TutorialsPage() {
         titleAr="الدروس"
         subtitle="Master Football Manager with our comprehensive guides and tutorials."
         subtitleAr="أتقن Football Manager مع أدلتنا ودروسنا الشاملة."
-        backgroundImage="/images/banners/tutorials.jpg"
+        backgroundImage="/assets/banners/trainig.png"
         icon={<GraduationCap className="h-full w-full" />}
       />
       <div className="container py-12">
