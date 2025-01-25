@@ -11,19 +11,6 @@ import { ArrowRight } from 'lucide-react'
 
 const demoNews = [
   {
-    title: 'FM24 Winter Update Released',
-    titleAr: 'إصدار تحديث  الشتوي',
-    excerpt:
-      'The latest database update includes all January transfers and various gameplay improvements.',
-    excerptAr:
-      'يتضمن تحديث قاعدة البيانات الأخير جميع الانتقالات في يناير وتحسينات متنوعة في اللعب.',
-    date: '2024-02-15',
-    category: 'Updates',
-    categoryAr: 'التحديثات',
-    slug: 'fm24-winter-update',
-    image: '/images/news/winter-update.jpg',
-  },
-  {
     title: 'Top 10 Wonderkids for FM24',
     titleAr: 'أفضل 10 مواهب شابة في FM24',
     excerpt:
@@ -36,19 +23,6 @@ const demoNews = [
     image: '/images/news/wonderkids.jpg',
   },
   //4b6f6cb3e22f1f2ecbba78e8c97f5f9a720c5c52623eead0d8479d0e1cb07296153e9341add7212bfd8a653d8ff80c59a5098131455eb527a566f0e0371d9e3bf162dd570f23686f45352cd1864cfea71256975506bea6107e997a15d067f0fc3d9812c95dd119389043979d271465711872c3c0b3fa96a2a75ede621a9aaaaa
-  {
-    title: 'New Tactical Analysis Feature',
-    titleAr: 'ميزة التحليل التكتيكي الجديدة',
-    excerpt:
-      'Sports Interactive introduces advanced tactical analysis tools in the latest update.',
-    excerptAr:
-      'تقدم Sports Interactive أدوات متقدمة لتحليل التكتيكات في التحديث الأخير.',
-    date: '2024-02-05',
-    category: 'Features',
-    categoryAr: 'الميزات',
-    slug: 'tactical-analysis-feature',
-    image: '/images/news/tactics.jpg',
-  },
   {
     title: 'Community Tactic of the Month',
     titleAr: 'تكتيك المجتمع لهذا الشهر',
@@ -70,9 +44,10 @@ export default function NewsSection() {
   useEffect(() => {
     async function loadArticles() {
       try {
-        const data = await fetchArticles()
-        console.log('Articles:', articles)
+        const data = await fetchArticles(language)
         setArticles(data)
+        console.log('Selected Language:', language)
+        console.log('Fetched Articles:', data)
       } catch (error) {
         console.error('Error loading articles:', error)
       } finally {
@@ -81,7 +56,7 @@ export default function NewsSection() {
     }
 
     loadArticles()
-  }, [])
+  }, [language])
 
   return (
     <div className="flex flex-col gap-8">

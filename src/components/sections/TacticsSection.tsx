@@ -5,45 +5,6 @@ import Link from 'next/link'
 import TacticCard from '../cards/TacticCard'
 import { ArrowRight } from 'lucide-react'
 
-const demoTactics = [
-  {
-    title: 'Tiki-Taka 4-3-3',
-    titleAr: 'تيكي-تاكا 4-3-3',
-    formation: '4-3-3',
-    downloads: 2500,
-    rating: 4.9,
-    image: '/images/tactics/tiki-taka.jpg',
-    slug: 'tiki-taka-433',
-  },
-  {
-    title: 'Park the Bus 4-2-3-1',
-    titleAr: 'جيجينبريس 4-2-3-1',
-    formation: '4-2-3-1',
-    downloads: 1800,
-    rating: 4.7,
-    image: '/images/tactics/gegenpress.jpg',
-    slug: 'gegenpress-4231',
-  },
-  {
-    title: "Ahly's 4-2-3-1",
-    titleAr: 'جيجينبريس 4-2-3-1',
-    formation: '4-2-3-1',
-    downloads: 1800,
-    rating: 4.7,
-    image: '/images/tactics/gegenpress.jpg',
-    slug: 'gegenpress-4231',
-  },
-  {
-    title: 'Gegenpress 4-2-3-1',
-    titleAr: 'جيجينبريس 4-2-3-1',
-    formation: '4-2-3-1',
-    downloads: 1800,
-    rating: 4.7,
-    image: '/images/tactics/gegenpress.jpg',
-    slug: 'gegenpress-4231',
-  },
-]
-
 export default function TacticsSection() {
   const { language } = useLanguage()
 

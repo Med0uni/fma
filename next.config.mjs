@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: 'cdn.cloudflare.steamstatic.com',
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '/uploads/**',
+      },
     ],
   },
 }

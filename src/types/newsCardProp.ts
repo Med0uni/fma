@@ -1,7 +1,6 @@
-import { FeaturedImage } from './featuredImage'
+import { FeaturedImage } from "./featuredImage"
 
-export interface Article {
-  id: number
+export interface NewsCardProps {
   title: string
   excerpt: string
   date: string
