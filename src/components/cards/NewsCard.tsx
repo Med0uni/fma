@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Calendar, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { NewsCardProps } from '@/types/newsCardProp'
+import { NewsCardProps } from '@/types/props/newsCardProp'
 import { useLanguage } from '@/providers/language-provider'
 
 export default function NewsCard({
@@ -16,7 +16,6 @@ export default function NewsCard({
   featuredImage,
 }: NewsCardProps) {
   const { language } = useLanguage()
-  const BASE_URL = 'http://localhost:1331'
 
   const formattedDate = new Date(date).toLocaleDateString(language, {
     year: 'numeric',
@@ -26,7 +25,7 @@ export default function NewsCard({
 
   const readMoreText = language === 'en' ? 'Read More' : 'اقرأ المزيد'
 
-  const imageUrl = `${BASE_URL}${featuredImage?.formats?.medium?.url || 'default-image.jpg'}`
+  const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}${featuredImage?.formats?.medium?.url || 'default-image.jpg'}`
 
   return (
     <div className="group relative overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-lg">

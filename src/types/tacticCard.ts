@@ -1,4 +1,4 @@
-import { FeaturedImage } from "./featuredImage"
+import { FeaturedImage } from './featuredImage'
 
 export interface TacticCard {
   id: string

@@ -24,14 +24,14 @@ export async function fetchTactics(language: string, limit: number = 4) {
 
     const tactics = response.data.data.map((tactic: any) => ({
       id: tactic.id,
-      title: tactic.attributes.title,
-      slug: tactic.attributes.slug,
-      description: tactic.attributes.description,
-      formation: tactic.attributes.Formation,
-      tag: tactic.attributes.tag,
-      datePublished: tactic.attributes.datePublished,
-      author: tactic.attributes.author,
-      featuredImage: tactic.attributes.featuredImage?.url || null,
+      title: tactic.title,
+      slug: tactic.slug,
+      description: tactic.description,
+      formation: tactic.Formation,
+      tag: tactic.tag,
+      datePublished: tactic.datePublished,
+      author: tactic.author,
+      featuredImage: tactic.featuredImage || null,
       locale: language,
     }))
 

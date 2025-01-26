@@ -3,10 +3,25 @@
 import { useLanguage } from '@/providers/language-provider'
 import Link from 'next/link'
 import TacticCard from '../cards/TacticCard'
+import { useTactics } from '@/hooks/useTactics'
 import { ArrowRight } from 'lucide-react'
 
 export default function TacticsSection() {
   const { language } = useLanguage()
+
+  const { tactics, loading, error } = useTactics(language, 4)
+
+  if (loading) {
+    return <p>{language === 'en' ? 'Loading...' : 'جاري التحميل...'}</p>
+  }
+
+  if (error) {
+    return (
+      <p>
+        {language === 'en' ? 'Error loading tactics' : 'خطأ في تحميل التكتيكات'}
+      </p>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -23,7 +38,7 @@ export default function TacticsSection() {
         </Link>
       </div>
       <div className="grid gap-4">
-        {demoTactics.map((tactic, index) => (
+        {tactics.map((tactic, index) => (
           <TacticCard key={index} {...tactic} />
         ))}
       </div>

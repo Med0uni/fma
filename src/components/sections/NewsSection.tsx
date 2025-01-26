@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { fetchArticles } from '@/services/articlesService'
 import { Article } from '@/types/article'
-import NewsCard from '@/components/news/NewsCard'
+import NewsCard from '@/components/cards/NewsCard'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
@@ -46,8 +46,8 @@ export default function NewsSection() {
       try {
         const data = await fetchArticles(language)
         setArticles(data)
-        console.log('Selected Language:', language)
-        console.log('Fetched Articles:', data)
+        //console.log('Selected Language:', language)
+        //console.log('Fetched Articles:', data)
       } catch (error) {
         console.error('Error loading articles:', error)
       } finally {
