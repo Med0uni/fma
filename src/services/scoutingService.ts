@@ -14,7 +14,7 @@ const apiClient = axios.create({
  * @param {number} [limit=3] - The maximum number of scouting data to fetch.
  * @returns {Promise<Array>} - A promise resolving to a list of scouting data.
  */
-export async function fetchScoutings(language: string, limit: number = 3) {
+export async function fetchScoutings(language: string, limit: number) {
   try {
     const locale = language === 'en' ? LOCALES.EN : LOCALES.AR
 
@@ -28,7 +28,7 @@ export async function fetchScoutings(language: string, limit: number = 3) {
       slug: scouting.slug,
       date: scouting.date,
       category: scouting.category,
-      image: scouting.featuredImage ? scouting.featuredImage.url : null,
+      featuredImage: scouting.featuredImage || null,
       content: scouting.content,
       locale: language,
     }))
@@ -38,8 +38,7 @@ export async function fetchScoutings(language: string, limit: number = 3) {
         (
           a: { date: string | number | Date },
           b: { date: string | number | Date }
-        ) =>
-          new Date(b.date).getTime() - new Date(a.date).getTime()
+        ) => new Date(b.date).getTime() - new Date(a.date).getTime()
       )
       .slice(0, limit)
 

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { fetchScoutings } from '@/services/scoutingService'
-import { ScoutingCard } from '@/types/scoutingCard'
 
-export function useScoutings(language: string, limit: number = 3) {
+export function useScoutings(language: string, limit: number = 4) {
   const [scoutings, setScoutings] = useState<ScoutingCard[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
