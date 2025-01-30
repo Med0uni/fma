@@ -10,21 +10,17 @@ import { useLanguage } from '@/providers/language-provider'
 export default function TacticCard({
   title,
   formation,
-  //downloads,
-  //rating,
   featuredImage,
   slug,
 }: TacticCardProps) {
   const { language } = useLanguage()
 
-  const readMoreText = language === 'en' ? 'Read More' : 'اقرأ المزيد'
-
   const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}${featuredImage?.url || '/default-image.jpg'}`
 
   return (
     <Link href={`/tactics/${slug}`}>
-      <div className="group relative overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-md">
-        <div className="relative h-32 w-full">
+      <div className="group relative h-[280px] overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-md">
+        <div className="relative h-36 w-full">
           <Image
             src={imageUrl}
             alt={title}
@@ -36,27 +32,18 @@ export default function TacticCard({
             {formation}
           </div>
         </div>
-        <div className="p-4">
-          <h3 className="line-clamp-1 font-semibold transition-colors group-hover:text-primary">
+        <div className="flex h-[136px] flex-col justify-between p-4">
+          <h3 className="line-clamp-2 text-base font-semibold transition-colors group-hover:text-primary">
             {title}
           </h3>
           <div className="mt-2 flex items-center justify-between text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <Download className="h-4 w-4" />
-              {/*<span>{downloads}</span>*/}
             </div>
             <div className="flex items-center gap-1">
               <Star className="h-4 w-4 fill-primary text-primary" />
-              {/*<span>{rating}</span>*/}
             </div>
           </div>
-
-          <Link
-            href={`/tactics/${slug}`}
-            className="inline-flex items-center text-sm text-primary transition-colors hover:text-primary/80 md:text-base"
-          >
-            <span>{language === 'en' ? 'View Details' : 'عرض التفاصيل'}</span>
-          </Link>
         </div>
       </div>
     </Link>

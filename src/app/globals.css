@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --herobackground: 0 0% 100%; /* Light mode */
+    --herobackground: 0 0% 100%;
 
     --background: 0 0% 100%;
     --foreground: 220 9% 15%;
@@ -102,6 +102,41 @@ input:focus {
 }
 
 @layer utilities {
+  .scroll-margin-top {
+    scroll-margin-top: calc(80px + 2rem);
+  }
+
+  .sticky-panel-container {
+    position: relative;
+    height: 100%;
+    contain: layout size;
+  }
+
+  .sticky-panel {
+    transition:
+      transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+      position 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, position;
+    contain: layout style;
+  }
+
+  .sticky-panel[data-state='fixed'] {
+    position: fixed;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .sticky-panel[data-state='absolute'] {
+    position: absolute;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .sticky-panel[data-state='relative'] {
+    position: relative;
+  }
+
   .sticky-until-news {
     position: sticky;
     top: 5rem;
@@ -122,10 +157,40 @@ input:focus {
   .smooth-scroll {
     scroll-behavior: smooth;
   }
+
+  @supports (backdrop-filter: blur(20px)) {
+    .newsletter-section {
+      backdrop-filter: blur(20px);
+    }
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+/* Hardware acceleration and performance optimizations */
+.hardware-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+/* Smooth transitions */
+.transition-position {
+  transition-property: transform, top;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Prevent layout shifts */
+.content-container {
+  contain: layout style size;
+}
+
+/* Ensure smooth scrolling except for users who prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -140,5 +205,204 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .sticky-panel {
+    transition: none !important;
+  }
+}
+
+/* Grid background pattern */
+.bg-grid-white\/10 {
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+.dark .bg-grid-white\/10 {
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Gradient masks */
+[mask-image] {
+  -webkit-mask-image: var(--tw-mask-image);
+  mask-image: var(--tw-mask-image);
+}
+
+/* Custom scrollbar styles */
+@media (min-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--secondary));
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground));
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Selection styles */
+::selection {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+/* Container queries */
+@container (min-width: 30em) {
+  .container-sm\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* Animation utilities */
+@layer utilities {
+  .animate-in {
+    animation: animate-in 0.3s ease-out;
+  }
+
+  .animate-out {
+    animation: animate-out 0.3s ease-in;
+  }
+
+  @keyframes animate-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes animate-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
+/* Responsive layout utilities */
+@layer utilities {
+  .responsive-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @screen sm {
+    .responsive-container {
+      max-width: 640px;
+    }
+  }
+
+  @screen md {
+    .responsive-container {
+      max-width: 768px;
+    }
+  }
+
+  @screen lg {
+    .responsive-container {
+      max-width: 1024px;
+    }
+  }
+
+  @screen xl {
+    .responsive-container {
+      max-width: 1280px;
+    }
+  }
+}
+
+/* Intersection Observer animations */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
+  transition:
+    opacity 0.6s ease-out,
+    transform 1.2s ease-out;
+  will-change: opacity, visibility, transform;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+/* Enhanced focus ring */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Improved tap targets for mobile */
+@media (max-width: 640px) {
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Better font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Improved motion-safe animations */
+@media (prefers-reduced-motion: no-preference) {
+  .motion-safe\:transition-transform {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
   }
 }

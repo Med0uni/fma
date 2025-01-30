@@ -16,14 +16,12 @@ export default function ScoutingCard({
 }: ScoutingCardProps) {
   const { language } = useLanguage()
 
-  const readMoreText = language === 'en' ? 'Read More' : 'اقرأ المزيد'
-
   const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}${featuredImage?.url || '/default-image.jpg'}`
 
   return (
     <Link href={`/scouting/${slug}`} passHref>
-      <div className="group relative overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-md">
-        <div className="relative h-32 w-full">
+      <div className="group relative h-[280px] overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-md">
+        <div className="relative h-36 w-full">
           <Image
             src={imageUrl}
             alt={title}
@@ -35,8 +33,8 @@ export default function ScoutingCard({
             {category}
           </div>
         </div>
-        <div className="p-4">
-          <h3 className="line-clamp-1 font-semibold transition-colors group-hover:text-primary">
+        <div className="flex h-[136px] flex-col justify-between p-4">
+          <h3 className="line-clamp-2 text-base font-semibold transition-colors group-hover:text-primary">
             {title}
           </h3>
           <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">

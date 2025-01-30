@@ -111,7 +111,7 @@ export default function ScoutingSection() {
         </Link>
       </div>
       <div className="grid gap-4">
-        {demoData.map((item, index) => (
+        {scoutings.map((item, index) => (
           <ScoutingCard key={index} {...item} />
         ))}
       </div>

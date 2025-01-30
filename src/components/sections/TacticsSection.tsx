@@ -132,7 +132,7 @@ export default function TacticsSection() {
         </Link>
       </div>
       <div className="grid gap-4">
-        {demoData.map((tactic, index) => (
+        {tactics.map((tactic, index) => (
           <TacticCard key={index} {...tactic} />
         ))}
       </div>
