@@ -19,15 +19,19 @@ export async function fetchScoutings(language: string, limit: number) {
     const locale = language === 'en' ? LOCALES.EN : LOCALES.AR
 
     const response = await apiClient.get('/scoutings', {
-      params: { locale, populate: 'featuredImage' },
-    })
+      params: { 
+        locale, 
+        'populate[featuredImage]': true, 
+        'populate[category]': true, 
+      },
+    });
 
     const scoutings = response.data.data.map((scouting: any) => ({
       id: scouting.id,
       title: scouting.title,
       slug: scouting.slug,
       date: scouting.date,
-      category: scouting.category,
+      category: scouting.category.name,
       featuredImage: scouting.featuredImage || null,
       content: scouting.content,
       locale: language,

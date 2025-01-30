@@ -32,12 +32,12 @@ export default function ScoutingCard({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
           <div className="absolute bottom-2 left-2 rounded-md bg-primary/10 px-2 py-1 text-sm text-primary">
-            {language === 'en' ? category : content}
+            {category}
           </div>
         </div>
         <div className="p-4">
           <h3 className="line-clamp-1 font-semibold transition-colors group-hover:text-primary">
-            {language === 'en' ? title : content}
+            {title}
           </h3>
           <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
             <Calendar className="h-4 w-4" />

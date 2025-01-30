@@ -9,30 +9,96 @@ import NewsCard from '@/components/cards/NewsCard'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
-const demoNews = [
+const demoData = [
   {
-    title: 'Top 10 Wonderkids for FM24',
-    titleAr: 'أفضل 10 مواهب شابة في FM24',
+    id: 8,
+    documentId: 'r24wfd9b7pgpuyizjzyqqx75',
+    title: 'FM24 Winter Update Released',
+    slug: 'fm24-winter-update',
+    createdAt: '2025-01-18T17:20:32.631Z',
+    updatedAt: '2025-01-18T22:32:48.356Z',
+    publishedAt: '2025-01-18T22:32:48.372Z',
+    locale: 'en',
+    content:
+      'Here’s everything you need to know about the Football Manager 2024 winter update...',
+    category: 'News',
+    datePublished: '2025-01-18',
     excerpt:
-      'Discover the most promising young talents in Football Manager 2024.',
-    excerptAr: 'اكتشف أكثر المواهب الشابة الواعدة في Football Manager 2024.',
-    date: '2024-02-10',
-    category: 'Guides',
-    categoryAr: 'الأدلة',
-    slug: 'top-wonderkids-fm24',
-    image: '/images/news/wonderkids.jpg',
+      'The latest database update includes all January transfers and various gameplay improvements.',
+    featuredImage: {
+      formats: {
+        medium: {
+          url: '/uploads/medium_stadium_364d059495.jpg',
+        },
+      },
+    },
   },
-  //4b6f6cb3e22f1f2ecbba78e8c97f5f9a720c5c52623eead0d8479d0e1cb07296153e9341add7212bfd8a653d8ff80c59a5098131455eb527a566f0e0371d9e3bf162dd570f23686f45352cd1864cfea71256975506bea6107e997a15d067f0fc3d9812c95dd119389043979d271465711872c3c0b3fa96a2a75ede621a9aaaaa
   {
-    title: 'Community Tactic of the Month',
-    titleAr: 'تكتيك المجتمع لهذا الشهر',
-    excerpt: "Check out this month's most successful community-created tactic.",
-    excerptAr: 'تعرف على أنجح تكتيك تم إنشاؤه من قبل المجتمع هذا الشهر.',
-    date: '2024-02-01',
-    category: 'Community',
-    categoryAr: 'المجتمع',
-    slug: 'community-tactic-february',
-    image: '/images/news/community.jpg',
+    id: 9,
+    documentId: 'r24wfd9b7pgpuyizjzyqqx76',
+    title: 'New Features in FM24 Tactics Update',
+    slug: 'fm24-tactics-update',
+    createdAt: '2025-01-19T10:15:32.631Z',
+    updatedAt: '2025-01-19T15:30:48.356Z',
+    publishedAt: '2025-01-19T15:32:48.372Z',
+    locale: 'en',
+    content: 'Football Manager 2024 tactics update brings exciting changes...',
+    category: 'Tactics',
+    datePublished: '2025-01-19',
+    excerpt:
+      'The latest tactics update for FM24 introduces new strategies and tweaks.',
+    featuredImage: {
+      formats: {
+        medium: {
+          url: '/uploads/medium_tactics_update_364d059495.jpg',
+        },
+      },
+    },
+  },
+  {
+    id: 10,
+    documentId: 'r24wfd9b7pgpuyizjzyqqx77',
+    title: 'Top 5 Football Manager 2024 Challenges',
+    slug: 'fm24-challenges',
+    createdAt: '2025-01-20T14:10:32.631Z',
+    updatedAt: '2025-01-20T16:35:48.356Z',
+    publishedAt: '2025-01-20T16:45:48.372Z',
+    locale: 'en',
+    content:
+      'In this article, we explore the top 5 challenges to tackle in Football Manager 2024...',
+    category: 'Challenges',
+    datePublished: '2025-01-20',
+    excerpt:
+      'Looking for a new challenge in FM24? Here are the top 5 you can try.',
+    featuredImage: {
+      formats: {
+        medium: {
+          url: '/uploads/medium_challenges_364d059495.jpg',
+        },
+      },
+    },
+  },
+  {
+    id: 11,
+    documentId: 'r24wfd9b7pgpuyizjzyqqx78',
+    title: 'FM24 Advanced Scouting Tips',
+    slug: 'fm24-advanced-scouting',
+    createdAt: '2025-01-21T11:00:32.631Z',
+    updatedAt: '2025-01-21T12:30:48.356Z',
+    publishedAt: '2025-01-21T12:45:48.372Z',
+    locale: 'en',
+    content:
+      'Advanced scouting tips in Football Manager 2024 can make all the difference in building your team...',
+    category: 'Scouting',
+    datePublished: '2025-01-21',
+    excerpt: 'Master the art of scouting in FM24 with these advanced tips.',
+    featuredImage: {
+      formats: {
+        medium: {
+          url: '/uploads/medium_scouting_tips_364d059495.jpg',
+        },
+      },
+    },
   },
 ]
 
@@ -79,7 +145,7 @@ export default function NewsSection() {
         </div>
       ) : (
         <div className="grid gap-6">
-          {articles.map((article) => (
+          {demoData.map((article) => (
             <NewsCard key={article.id} {...article} />
           ))}
         </div>
