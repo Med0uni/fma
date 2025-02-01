@@ -4,10 +4,11 @@ import { useLanguage } from '@/providers/language-provider'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { fetchArticles } from '@/services/articlesService'
-import { Article } from '@/types/article'
+import { useArticles } from '@/hooks/useArticles'
+import { Article } from '@/types/articles/article'
 import NewsCard from '@/components/cards/NewsCard'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const demoData = [
   {
@@ -104,25 +105,19 @@ const demoData = [
 
 export default function NewsSection() {
   const { language } = useLanguage()
-  const [articles, setArticles] = useState<Article[]>([])
-  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    async function loadArticles() {
-      try {
-        const data = await fetchArticles(language)
-        setArticles(data)
-        //console.log('Selected Language:', language)
-        //console.log('Fetched Articles:', data)
-      } catch (error) {
-        console.error('Error loading articles:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
+  const { articles, currentPage, totalPages, setCurrentPage, loading, error } =
+    useArticles(language, 3)
 
-    loadArticles()
-  }, [language])
+  console.log(articles)
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500">
+        {language === 'en' ? 'Failed to load articles' : 'فشل تحميل المقالات'}
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-8">
@@ -135,7 +130,11 @@ export default function NewsSection() {
           className="group flex items-center gap-2 text-sm text-primary transition-colors hover:text-primary/80"
         >
           <span>{language === 'en' ? 'View All' : 'عرض المزيد'}</span>
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          {language === 'ar' ? (
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          ) : (
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          )}{' '}
         </Link>
       </div>
 
@@ -145,11 +144,42 @@ export default function NewsSection() {
         </div>
       ) : (
         <div className="grid gap-6">
-          {articles.map((article) => (
-            <NewsCard key={article.id} {...article} />
-          ))}
+          {articles.length > 0 ? (
+            articles.map((article) => (
+              <NewsCard key={article.id} {...article} />
+            ))
+          ) : (
+            <div className="text-center">
+              {language === 'en' ? 'No articles available' : 'لا توجد مقالات'}
+            </div>
+          )}
         </div>
       )}
+
+      {/* Pagination controls
+      {totalPages > 1 && (
+        <div className="mt-4 flex justify-center">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+            className="rounded-md bg-primary px-4 py-2 text-white disabled:bg-gray-400"
+          >
+            {language === 'en' ? 'Previous' : 'السابق'}
+          </button>
+          <span className="mx-4">
+            {language === 'en'
+              ? `Page ${currentPage} of ${totalPages}`
+              : `الصفحة ${currentPage} من ${totalPages}`}
+          </span>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+            className="rounded-md bg-primary px-4 py-2 text-white disabled:bg-gray-400"
+          >
+            {language === 'en' ? 'Next' : 'التالي'}
+          </button>
+        </div>
+      )} */}
     </div>
   )
 }

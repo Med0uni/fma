@@ -7,9 +7,7 @@ import { cn } from '@/lib/utils'
 
 interface PageBannerProps {
   title: string
-  titleAr: string
   subtitle?: string
-  subtitleAr?: string
   backgroundImage: string
   icon?: React.ReactNode
   height?: 'sm' | 'md' | 'lg'
@@ -26,9 +24,7 @@ const heightClasses = {
 
 export default function PageBanner({
   title,
-  titleAr,
   subtitle,
-  subtitleAr,
   backgroundImage,
   icon,
   height = 'md',
@@ -42,7 +38,7 @@ export default function PageBanner({
     <div
       className={cn('relative w-full overflow-hidden', heightClasses[height])}
       role="banner"
-      aria-label={language === 'en' ? title : titleAr}
+      aria-label={title}
     >
       <div className="absolute inset-0">
         <Image
@@ -86,18 +82,18 @@ export default function PageBanner({
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
             >
-              {language === 'en' ? title : titleAr}
+              {title}
             </motion.h1>
           </div>
 
-          {(subtitle || subtitleAr) && (
+          {subtitle && (
             <motion.p
               className="max-w-2xl text-lg text-muted-foreground md:text-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              {language === 'en' ? subtitle : subtitleAr}
+              {subtitle}
             </motion.p>
           )}
 

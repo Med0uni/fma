@@ -1,10 +1,11 @@
-import { FeaturedImage } from './featuredImage'
+import { FeaturedImage } from '.././featuredImage'
+import { Category } from '../articles/category'
 
 export interface NewsCardProps {
   title: string
   excerpt: string
-  date: string
-  category: string
+  publishedAt: string
+  category: Category
   slug: string
   featuredImage: FeaturedImage
 }

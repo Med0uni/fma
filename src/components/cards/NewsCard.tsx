@@ -10,14 +10,14 @@ import { useLanguage } from '@/providers/language-provider'
 export default function NewsCard({
   title,
   excerpt,
-  date,
+  publishedAt,
   category,
   slug,
   featuredImage,
 }: NewsCardProps) {
   const { language } = useLanguage()
 
-  const formattedDate = new Date(date).toLocaleDateString(language, {
+  const formattedDate = new Date(publishedAt).toLocaleDateString(language, {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -45,10 +45,10 @@ export default function NewsCard({
             <div className="flex-1 p-4 md:p-6">
               <div className="mb-2 flex items-center gap-2 text-xs text-muted-foreground md:text-sm">
                 <Calendar className="h-3 w-3 md:h-4 md:w-4" />
-                <time dateTime={date}>{formattedDate}</time>
+                <time dateTime={publishedAt}>{formattedDate}</time>
                 <span>•</span>
                 <span className="rounded-full bg-primary/10 px-2 py-0.5 text-primary">
-                  {category}
+                  {category.name}
                 </span>
               </div>
 

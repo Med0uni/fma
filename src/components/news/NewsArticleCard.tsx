@@ -9,12 +9,15 @@ import { useLanguage } from '@/providers/language-provider'
 interface NewsArticleCardProps {
   title: string
   excerpt: string
-  date: string
-  category: string
+  publishedAt: string
+  category: {
+    name: string
+  }
+  //tags: string[]
   slug: string
   featuredImage: {
     formats: {
-      medium: {
+      large: {
         url: string
       }
     }
@@ -24,14 +27,14 @@ interface NewsArticleCardProps {
 export default function NewsArticleCard({
   title,
   excerpt,
-  date,
+  publishedAt,
   category,
   slug,
   featuredImage,
 }: NewsArticleCardProps) {
   const { language } = useLanguage()
 
-  const formattedDate = new Date(date).toLocaleDateString(language, {
+  const formattedDate = new Date(publishedAt).toLocaleDateString(language, {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -51,7 +54,7 @@ export default function NewsArticleCard({
       <Link href={`/news/${slug}`} className="flex h-full flex-col">
         <div className="relative h-48 overflow-hidden">
           <Image
-            src={featuredImage.formats.medium.url}
+            src={featuredImage.formats.large.url}
             alt={title}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -61,7 +64,7 @@ export default function NewsArticleCard({
           <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
           <div className="absolute bottom-4 left-4">
             <span className="rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary">
-              {category}
+              {category?.name}
             </span>
           </div>
         </div>
@@ -69,7 +72,7 @@ export default function NewsArticleCard({
         <div className="flex flex-1 flex-col p-4">
           <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
             <Calendar className="h-4 w-4" />
-            <time dateTime={date}>{formattedDate}</time>
+            <time dateTime={publishedAt}>{formattedDate}</time>
           </div>
 
           <h2 className="mb-2 line-clamp-2 flex-1 text-xl font-semibold tracking-tight transition-colors group-hover:text-primary">

@@ -1,42 +1,59 @@
-import axios from 'axios'
 import { LOCALES } from '@/lib/locales'
+import { Article } from '@/types/articles/article'
 
-const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL,
-  headers: {
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_KEY}`,
-  },
-})
-export async function fetchArticles(language: string, limit: number = 3) {
+export async function fetchArticles(
+  language: string,
+  pageSize: number = 6,
+  page: number = 1,
+  cacheStrategy: RequestCache = 'default'
+): Promise<{ articles: Article[]; totalPages: number; totalItems: number }> {
   try {
     const locale = language === 'en' ? LOCALES.EN : LOCALES.AR
 
-    const response = await apiClient.get('/articles', {
-      params: { locale, populate: 'featuredImage' },
+    const url = new URL(
+      `${process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL}/articles`
+    )
+    url.searchParams.append('locale', locale)
+    url.searchParams.append('populate', 'featuredImage')
+    url.searchParams.append('populate', 'category')
+    url.searchParams.append('populate', 'tags')
+    url.searchParams.append('sort', 'publishedAt:desc')
+    url.searchParams.append('pagination[page]', page.toString())
+    url.searchParams.append('pagination[pageSize]', pageSize.toString())
+
+    const response = await fetch(url.toString(), {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_KEY}`,
+      },
+      cache: cacheStrategy,
     })
 
-    const articles = response.data.data.map((article: any) => ({
+    if (!response.ok) {
+      throw new Error('Network response was not ok')
+    }
+
+    const data = await response.json()
+
+    const articles = data.data.map((article: any) => ({
       id: article.id,
       title: article.title,
       excerpt: article.excerpt,
-      date: article.datePublished,
-      category: article.tags,
+      publishedAt: article.publishedAt,
+      category: article.category,
+      tags: article.tags,
       slug: article.slug,
       featuredImage: article.featuredImage,
       locale: language,
     }))
 
-    const sortedArticles = articles
-      .sort(
-        (
-          a: { date: string | number | Date },
-          b: { date: string | number | Date }
-        ) => new Date(b.date).getTime() - new Date(a.date).getTime()
-      )
-      .slice(0, limit)
-    return sortedArticles
+    return {
+      articles,
+      totalPages: data.meta.pagination.pageCount,
+      totalItems: data.meta.pagination.total,
+    }
   } catch (error) {
     console.error('Error fetching articles:', error)
-    throw error
+    return { articles: [], totalPages: 0, totalItems: 0 }
   }
 }
