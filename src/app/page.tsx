@@ -3,11 +3,6 @@
 import Hero from '@/components/home/Hero'
 import NewsSection from '@/components/sections/NewsSection'
 import SocialPanel from '@/components/social/SocialPanel'
-import ScoutingSection from '@/components/sections/ScoutingSection'
-import TacticsSection from '@/components/sections/TacticsSection'
-import SaveIdeasSection from '@/components/sections/SaveIdeasSection'
-import FMGuidesSection from '@/components/sections/FMGuidesSection'
-import SupportSection from '@/components/sections/SupportSection'
 import NewsletterSection from '@/components/sections/NewsletterSection'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
@@ -38,25 +33,6 @@ export default function Home() {
             >
               <NewsSection />
             </motion.div>
-
-            <div className="grid gap-8 md:grid-cols-2">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <ScoutingSection />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <TacticsSection />
-              </motion.div>
-            </div>
           </div>
 
           <div className="lg:w-1/4 lg:pl-4">
@@ -70,41 +46,6 @@ export default function Home() {
                 <SocialPanel />
               </div>
             </motion.div>
-          </div>
-        </div>
-
-        <div className="mt-16">
-          <div className="flex flex-col gap-8 lg:flex-row">
-            <div className="lg:w-3/4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <SaveIdeasSection />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <FMGuidesSection />
-              </motion.div>
-            </div>
-            {/* <div className="lg:w-1/4">
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <div className="sticky-until-news">
-                  <SupportSection />
-                </div>
-              </motion.div>
-            </div> */}
           </div>
         </div>
       </div>

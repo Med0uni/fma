@@ -6,7 +6,7 @@ import { Suspense } from 'react'
 export default async function NewsServer({ language }: { language: string }) {
   const { articles, totalPages } = await fetchArticles(
     language,
-    3,
+    6,
     1,
     'force-cache'
   )
