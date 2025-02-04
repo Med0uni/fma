@@ -9,12 +9,26 @@ import { useRef } from 'react'
 
 export default function Home() {
   const scrollRef = useRef(null)
+  const newsletterRef = useRef(null)
+  const socialPanelRef = useRef(null)
+
+  // Scroll progress for hero parallax
   const { scrollYProgress } = useScroll({
     target: scrollRef,
     offset: ['start start', 'end start'],
   })
-
   const y = useTransform(scrollYProgress, [0, 1], [0, -50])
+
+  // Scroll control for social panel
+  const { scrollYProgress: socialScrollY } = useScroll({
+    target: scrollRef,
+    offset: ['start start', 'end end'],
+  })
+
+  // Calculate the maximum translateY to prevent overlap
+  const socialY = useTransform(socialScrollY, [0, 1], [0, -100], {
+    clamp: false,
+  })
 
   return (
     <div ref={scrollRef}>
@@ -37,12 +51,11 @@ export default function Home() {
 
           <div className="lg:w-1/4 lg:pl-4">
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              ref={socialPanelRef}
+              style={{ y: socialY }}
+              className="sticky-panel-container"
             >
-              <div className="sticky-until-news">
+              <div className="sticky-until-news hardware-accelerated">
                 <SocialPanel />
               </div>
             </motion.div>
@@ -51,14 +64,16 @@ export default function Home() {
       </div>
 
       {/* NewsletterSection */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <NewsletterSection />
-      </motion.div>
+      <div ref={newsletterRef}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <NewsletterSection />
+        </motion.div>
+      </div>
     </div>
   )
 }

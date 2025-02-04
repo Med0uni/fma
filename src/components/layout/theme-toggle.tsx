@@ -8,6 +8,12 @@ import { Button } from '@/components/ui/button'
 export default function ThemeToggle() {
   const { setTheme, theme } = useTheme()
 
+  // Persist theme choice in localStorage
+  const handleThemeChange = (newTheme: string) => {
+    setTheme(newTheme)
+    localStorage.setItem('fm-theme', newTheme)
+  }
+
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}

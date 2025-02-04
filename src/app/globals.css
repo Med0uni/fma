@@ -406,3 +406,18 @@ body {
     transition-duration: 150ms;
   }
 }
+
+.sticky-panel-container {
+  position: relative;
+  height: 100%;
+  contain: layout size;
+  z-index: 10;
+}
+
+.hardware-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}

@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/providers/theme-provider'
 import { LanguageProvider } from '@/providers/language-provider'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
+import SimplifiedHeader from '@/components/layout/simplified-header'
 
 // Latin font
 const inter = Inter({
@@ -107,11 +108,12 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
+          storageKey="fm-theme"
           disableTransitionOnChange
         >
           <LanguageProvider>
             <div className="relative flex min-h-screen flex-col font-sans">
-              <Header />
+              <SimplifiedHeader />
               <main className="flex-1">{children}</main>
               <Footer />
             </div>

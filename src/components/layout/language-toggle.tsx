@@ -2,17 +2,18 @@
 
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
+import { useLanguage } from '@/providers/language-provider'
 
 export default function LanguageToggle() {
-  const [lang, setLang] = React.useState('en')
+  const { language, setLanguage } = useLanguage()
 
   return (
     <Button
       variant="ghost"
-      onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
+      onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
       className="w-14"
     >
-      {lang.toUpperCase()}
+      {language.toUpperCase()}
     </Button>
   )
 }

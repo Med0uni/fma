@@ -9,6 +9,8 @@ import { Article } from '@/types/articles/article'
 import NewsCard from '@/components/cards/NewsCard'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { Button } from '../ui/button'
+import { Spinner } from '../ui/spinner'
 
 const demoData = [
   {
@@ -102,14 +104,10 @@ const demoData = [
     },
   },
 ]
-
 export default function NewsSection() {
   const { language } = useLanguage()
-
-  const { articles, currentPage, totalPages, setCurrentPage, loading, error } =
+  const { articles, currentPage, totalPages, goToPage, loading, error } =
     useArticles(language, 3)
-
-  console.log(articles)
 
   if (error) {
     return (
@@ -134,13 +132,13 @@ export default function NewsSection() {
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           ) : (
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          )}{' '}
+          )}
         </Link>
       </div>
 
       {loading ? (
-        <div className="text-center">
-          {language === 'en' ? 'Loading...' : 'جاري التحميل...'}
+        <div className="flex h-48 items-center justify-center">
+          <Spinner />
         </div>
       ) : (
         <div className="grid gap-6">
@@ -156,30 +154,47 @@ export default function NewsSection() {
         </div>
       )}
 
-      {/* Pagination controls
       {totalPages > 1 && (
-        <div className="mt-4 flex justify-center">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage(currentPage - 1)}
-            className="rounded-md bg-primary px-4 py-2 text-white disabled:bg-gray-400"
-          >
-            {language === 'en' ? 'Previous' : 'السابق'}
-          </button>
-          <span className="mx-4">
+        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+          <div className="text-sm text-muted-foreground">
             {language === 'en'
-              ? `Page ${currentPage} of ${totalPages}`
-              : `الصفحة ${currentPage} من ${totalPages}`}
-          </span>
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage(currentPage + 1)}
-            className="rounded-md bg-primary px-4 py-2 text-white disabled:bg-gray-400"
-          >
-            {language === 'en' ? 'Next' : 'التالي'}
-          </button>
+              ? `Showing ${articles.length} of ${totalPages * 3} results`
+              : `عرض ${articles.length} من ${totalPages * 3} نتائج`}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              disabled={currentPage === 1 || loading}
+              onClick={() => goToPage(currentPage - 1)}
+            >
+              {language === 'en' ? 'Previous' : 'السابق'}
+            </Button>
+
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <Button
+                  key={index + 1}
+                  variant={currentPage === index + 1 ? 'default' : 'outline'}
+                  className="h-8 w-8 p-0"
+                  disabled={currentPage === index + 1 || loading}
+                  onClick={() => goToPage(index + 1)}
+                >
+                  {index + 1}
+                </Button>
+              ))}
+            </div>
+
+            <Button
+              variant="outline"
+              disabled={currentPage === totalPages || loading}
+              onClick={() => goToPage(currentPage + 1)}
+            >
+              {language === 'en' ? 'Next' : 'التالي'}
+            </Button>
+          </div>
         </div>
-      )} */}
+      )}
     </div>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
 
 type Language = 'en' | 'ar'
 
@@ -15,6 +16,21 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>('en')
+
+  // Initialize language from cookie
+  useEffect(() => {
+    const savedLang = Cookies.get('fm-language')
+    if (savedLang === 'en' || savedLang === 'ar') {
+      setLanguage(savedLang)
+    }
+  }, [])
+
+  // Update cookie when language changes
+  useEffect(() => {
+    Cookies.set('fm-language', language, { expires: 365 })
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr'
+    document.documentElement.lang = language
+  }, [language])
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>

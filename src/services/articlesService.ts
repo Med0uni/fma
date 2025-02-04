@@ -5,7 +5,8 @@ export async function fetchArticles(
   language: string,
   pageSize: number = 6,
   page: number = 1,
-  cacheStrategy: RequestCache = 'default'
+  cacheStrategy: RequestCache = 'default',
+  signal?: AbortSignal
 ): Promise<{ articles: Article[]; totalPages: number; totalItems: number }> {
   try {
     const locale = language === 'en' ? LOCALES.EN : LOCALES.AR
@@ -27,33 +28,34 @@ export async function fetchArticles(
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_KEY}`,
       },
       cache: cacheStrategy,
+      signal,
     })
 
     if (!response.ok) {
-      throw new Error('Network response was not ok')
+      throw new Error(`HTTP error! status: ${response.status}`)
     }
 
     const data = await response.json()
 
-    const articles = data.data.map((article: any) => ({
-      id: article.id,
-      title: article.title,
-      excerpt: article.excerpt,
-      publishedAt: article.publishedAt,
-      category: article.category,
-      tags: article.tags,
-      slug: article.slug,
-      featuredImage: article.featuredImage,
-      locale: language,
-    }))
-
     return {
-      articles,
+      articles: data.data.map((article: any) => ({
+        id: article.id,
+        title: article.title,
+        excerpt: article.excerpt,
+        publishedAt: article.publishedAt,
+        category: article.category,
+        tags: article.tags,
+        slug: article.slug,
+        featuredImage: article.featuredImage,
+        locale: language,
+      })),
       totalPages: data.meta.pagination.pageCount,
       totalItems: data.meta.pagination.total,
     }
   } catch (error) {
-    console.error('Error fetching articles:', error)
-    return { articles: [], totalPages: 0, totalItems: 0 }
+    if ((error as Error).name !== 'AbortError') {
+      console.error('Error fetching articles:', error)
+    }
+    throw error
   }
 }

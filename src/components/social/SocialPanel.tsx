@@ -42,7 +42,7 @@ export default function SocialPanel() {
   ]
 
   return (
-    <div className="rounded-lg border bg-card p-6">
+    <div className="mt-[80px] rounded-lg border bg-card p-6">
       <h2 className="mb-6 text-xl font-semibold">
         {language === 'en' ? 'Join Our Community' : 'انضم إلى مجتمعنا'}
       </h2>

@@ -19,7 +19,7 @@ export default function NewsletterSection() {
   }
 
   return (
-    <section className="relative overflow-hidden">
+    <section id="newsletter-section" className="relative overflow-hidden">
       {/* Background with pattern and gradient */}
       <div className="absolute inset-0 bg-[url('/patterns/circuit.svg')] opacity-5" />
       <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20" />
